@@ -1,5 +1,29 @@
+local cmd = vim.cmd
+
 vim.o.background = 'dark'
 vim.o.termguicolors = true
+
+if (vim.fn.has('termguicolors') == 1) then
+  cmd('let $NVIM_TUI_ENABLE_TRUE_COLOR=1')
+
+  vim.o.t_8b = '^[[48;2;%lu;%lu;%lum'
+  vim.o.t_8f = '^[[38;2;%lu;%lu;%lum'
+
+  vim.o.t_Co = 256
+  vim.o.termguicolors = true
+end
+
+cmd([[
+augroup highlight_yank
+  autocmd!
+  au TextYankPost * silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=500})
+augroup END
+]])
+
+cmd([[
+highlight WhitespaceEOL ctermbg=red guibg=red
+match WhitespaceEOL /\s\+$/
+]])
 
 require'nvim-treesitter.configs'.setup {
 	highlight = {
