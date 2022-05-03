@@ -175,4 +175,75 @@ a_cmd('syntax sync maxlines=50')
 
 global.colorcolumn = 80
 
+global.timeout = false
+global.ttimeoutlen = 5
+
+-- tab length/size, and make it spaces... 
+global.tabstop = 2
+global.shiftwidth = 2
+global.expandtab = true
+global.softtabstop = 2
+global.smarttab = true
+global.shiftround = true
+
+-- Search settings
+global.hlsearch = true        -- highlight searches
+global.incsearch = true       -- do incremental searching
+global.ignorecase = true      -- ignore case when searching
+global.smartcase = true       -- if searching and search contains upper case, make case sensitive search
+global.magic = true           -- Changes the special characters that can be used in search patterns.
+global.showmatch = true       -- When a bracket is inserted, briefly jump to the matching one.
+global.matchtime = 2          -- and blink for two seconds
+global.inccommand = 'split'   -- Shows the effects of :subsitute, :smagic and :snonmagic as i type in a preview window.
+
+global.nrformats = 'octal,hex,alpha,bin' -- Enable Ctrl-A/Ctrl-X to work on octal and hex numbers, as well as characters
+
+-- Restore Position when repopening a file
+v_cmd([[au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
+
+-- Folding configuration
+global.foldcolumn = '0' -- disable foldcolumn
+
+--[[
+Sessions
+--------
+ Define what to save with `:mksession` regarding save and restore:
+ - blank - empty windows
+ - buffers - all buffers not only ones in a window
+ - curdir - the current directory
+ - folds - including manually created ones
+ - help - the help window
+ - options - all options and mapping
+ - resize - size of the vim window (lines and columns)
+ - tabpages - all tab pages
+ - winsize - window sizes
+ - winpos - the position of the whole vim window
+ ]]--
+global.sessionoptions = "blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize"
+
+-- Auto reload files
+v_cmd([[ au FocusGained,BufEnter * :checktime ]])
+
+global.hidden = true -- do not lose information on abondon buffers
+                     -- (and not hide the actual buffer, moved to different
+		     -- window)
+
+-- spell checker
+global.spelllang = 'en_us,en,he'
+global.spellfile = '/tmp/spell/en_us.utf8.add,/tmp/spell/en.utf8.add,/tmp/spell/he.utf8.add'
+global.thesaurus = global.thesaurus .. ',/tmp/spell/mthesaur.txt'
+global.spell = true -- enable spelling
+
+if vim.fn.has('diff') then
+--[[
+  Option settings for diff mode:
+
+  - internal: Use the internal diff library.
+  - filler: Show filler lines, to keep the text synchronized with a window that has inserted lines at the same position.
+  - closeoff: When a window is closed where 'diff' is set, and there is only one window remaining in the tab page with 'diff' set, execute :diffoff in that window.
+  - iwhite: Ignore changes in amount of white space.
+]]--
+  global.diffopt = "internal,filler,closeoff,iwhite" 
+end
+
 
