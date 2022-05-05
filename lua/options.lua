@@ -4,6 +4,8 @@ local buffer = vim.bo
 local v_cmd = vim.cmd
 local a_cmd = vim.api.nvim_command
 
+local home = os.getenv('HOME')
+
 -- basic encoding
 global.encoding = 'utf-8'
 global.fileencoding = 'utf-8'
@@ -141,8 +143,8 @@ v_cmd([[ autocmd VimResized * wincmd = ]]) -- Automatically equalize splits when
 
 global.updatetime=400           -- 400 millisecond of no key press the swap file will be written
 
-global.directory='~/tmp/swp'      -- Keep swap files out of the working dir, Adjust if needed in another dir
-global.tags='~/tmp/tags,tags'     -- Set tags directory
+global.directory= home .. '/tmp/swp'      -- Keep swap files out of the working dir, Adjust if needed in another dir
+global.tags= home .. '/tmp/tags,tags'     -- Set tags directory
 
 if (vim.fn.has('clipboard') == 1) then
   local clipboard = 'unnamed' -- use the '*' clipboard register
@@ -160,7 +162,7 @@ if vim.fn.has('persistent_undo') == 1 then
   and restores undo history from the same file on buffer read.
 ]]--
   global.undofile = true
-  global.undodir = '~/tmp/vim_undo/'
+  global.undodir = home .. '/tmp/vim_undo/'
 end
 
 if vim.fn.exists('g:did_load_filetypes') then
