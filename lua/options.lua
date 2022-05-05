@@ -48,7 +48,7 @@ global.numberwidth = 6        -- minimal number of columns for line number
 
 global.cindent = true     -- Enables automatic C program indenting.
 global.autoindent = true  -- Copy indent from current line when starting a new line (typing <CR>
-	 		  -- in Insert mode or when using the "o" or "O" command). 
+                          -- in Insert mode or when using the "o" or "O" command). 
 global.smartindent = true -- Do smart autoindenting when starting a new line.
 
 global.showcmd = true  -- Show (partial) command in the last line of the screen.
@@ -129,7 +129,7 @@ global.wildignore = global.wildignore .. ',*.so,*.zip,*.db,*.sqlite*'        --
 global.wildignore = global.wildignore .. ',*.o'                              -- object files
 global.wildignore = global.wildignore .. ',vendor/*'                         -- ignore vendor directory
 global.completeopt = 'longest,menu,menuone,noselect,preview'                 -- Just show the menu upon completion (faster)
-global.infercase = true                    				     -- Allow smarter completion by infering the case
+global.infercase = true                                                      -- Allow smarter completion by infering the case
 global.pumheight=15                                                          -- The maximum height of a completion menu
 
 global.lazyredraw = false -- do update the screen while executing stuff
@@ -226,7 +226,8 @@ v_cmd([[ au FocusGained,BufEnter * :checktime ]])
 
 global.hidden = true -- do not lose information on abondon buffers
                      -- (and not hide the actual buffer, moved to different
-		     -- window)
+                     -- window)
+global.switchbuf = 'uselast,useopen,split' -- Controls the behavior when switching between buffers
 
 -- spell checker
 global.spelllang = 'en_us,en,he'
