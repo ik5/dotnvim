@@ -1,3 +1,4 @@
+local  utils = require('utils')
 local global = vim.o
 local window = vim.wo
 local buffer = vim.bo
@@ -249,4 +250,8 @@ if vim.fn.has('diff') then
   global.diffopt = "internal,filler,closeoff,iwhite" 
 end
 
-
+if utils.executable('rg') then
+  global.grepprg =
+    [[rg --hidden --glob "!.git" --no-heading --smart-case --vimgrep --follow $*]]
+  global.grepformat = utils.add('%f:%l:%c:%m', global.grepformat)
+end
