@@ -4,6 +4,7 @@ local window = vim.wo
 local buffer = vim.bo
 local v_cmd = vim.cmd
 local a_cmd = vim.api.nvim_command
+local autocmd = vim.api.nvim_create_autocmd
 
 local home = utils.home()
 
@@ -140,7 +141,13 @@ global.lazyredraw = false -- do update the screen while executing stuff
 global.splitbelow = true -- Split below of me
 global.splitright = true -- Splits to the right
 
-v_cmd([[ autocmd VimResized * wincmd = ]]) -- Automatically equalize splits when Vim is resized
+-- Automatically equalize splits when Vim is resized
+autocmd('VimResized', {
+  pattern = '*',
+  callback = function(args)
+    v_cmd([[wincmd =]]) 
+  end
+})
 
 global.updatetime=400           -- 400 millisecond of no key press the swap file will be written
 
@@ -225,7 +232,14 @@ Sessions
 global.sessionoptions = "blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize"
 
 -- Auto reload files
-v_cmd([[ au FocusGained,BufEnter * :checktime ]])
+-- v_cmd([[ au FocusGained,BufEnter * :checktime ]])
+autocmd('FocusGained,BufEnter', { 
+  pattern = '*',
+  callback = function(args)
+    v_cmd([[ checktime ]])
+  end
+})
+
 
 global.hidden = true -- do not lose information on abondon buffers
                      -- (and not hide the actual buffer, moved to different
@@ -257,4 +271,10 @@ if utils.executable('rg') then
   global.grepformat = utils.add('%f:%l:%c:%m', global.grepformat)
 end
 
-
+autocmd('TermOpen', {
+  pattern = '*',
+  callback = function(args)
+    window.list = true
+    window.wrap = true
+  end
+})
