@@ -8,6 +8,7 @@ require 'impatient'
 
 require 'options'
 require 'commands'
+require 'keymapping'
 require 'colorscheme'
 
 

@@ -1,11 +1,11 @@
-local  utils = require('utils')
+local utils = require('utils')
 local global = vim.o
 local window = vim.wo
 local buffer = vim.bo
 local v_cmd = vim.cmd
 local a_cmd = vim.api.nvim_command
 
-local home = os.getenv('HOME')
+local home = utils.home()
 
 -- basic encoding
 global.encoding = 'utf-8'

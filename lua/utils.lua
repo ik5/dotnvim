@@ -42,4 +42,9 @@ function utils.uuidv4()
     return result
 end
 
+function utils.home()
+  local result = os.getenv('HOME')
+  return result
+end
+
 return utils
