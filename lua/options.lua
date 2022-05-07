@@ -250,8 +250,11 @@ if vim.fn.has('diff') then
   global.diffopt = "internal,filler,closeoff,iwhite" 
 end
 
+-- based on https://gist.github.com/lalitmee/c379ee6b5163ac3670cfbca9a356b6bb
 if utils.executable('rg') then
   global.grepprg =
     [[rg --hidden --glob "!.git" --no-heading --smart-case --vimgrep --follow $*]]
   global.grepformat = utils.add('%f:%l:%c:%m', global.grepformat)
 end
+
+

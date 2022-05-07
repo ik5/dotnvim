@@ -7,6 +7,7 @@ require 'packages'
 require 'impatient'
 
 require 'options'
+require 'commands'
 require 'colorscheme'
 
 
