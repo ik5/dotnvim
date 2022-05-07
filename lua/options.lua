@@ -232,7 +232,6 @@ Sessions
 global.sessionoptions = "blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize"
 
 -- Auto reload files
--- v_cmd([[ au FocusGained,BufEnter * :checktime ]])
 autocmd('FocusGained,BufEnter', { 
   pattern = '*',
   callback = function(args)
