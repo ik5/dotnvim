@@ -60,6 +60,8 @@ autocmd('FileType', {
   pattern = 'xml',
   callback = function(args)
     buffer.omnifunc = 'xmlcomplete#CompleteTags'
+    vim.g.xml_syntax_folding = 1
+    window.foldmethod = 'syntax'
   end
 })
 
@@ -174,10 +176,11 @@ autocmd('BufRead,BufNewFile', {
   end
 })
 
-autocmd('BufRead,BufNewFile', {
-  pattern = '*.json',
+autocmd('BufRead,BufNewFile,FileType', {
+  pattern = '*.json,json',
   callback = function(args)
     global.filetype = 'json'
+    window.foldmethod='syntax'
   end
 })
 
