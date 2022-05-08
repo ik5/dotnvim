@@ -184,6 +184,7 @@ a_cmd('syntax sync minlines=10')
 a_cmd('syntax sync maxlines=50')
 
 global.colorcolumn = 80
+window.colorcolumn = "80"
 
 global.timeout = false
 global.ttimeoutlen = 5
