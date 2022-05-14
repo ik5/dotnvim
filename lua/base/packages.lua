@@ -13,7 +13,7 @@ return require("packer").startup({
     use "lewis6991/impatient.nvim"
     use "wbthomason/packer.nvim"
     use 'nvim-lua/plenary.nvim'
-                
+
     -- Syntax and colors
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use "tanvirtin/monokai.nvim"
@@ -21,7 +21,15 @@ return require("packer").startup({
     use { 'powerline/fonts', run = './install.sh' }
     use 'ryanoasis/vim-devicons'
 
+    use {
+      "SmiteshP/nvim-gps",
+      requires = "nvim-treesitter/nvim-treesitter"
+    }
+
     -- LSP
-    use 'neovim/nvim-lspconfig'
+    use {
+      'neovim/nvim-lspconfig',
+      'williamboman/nvim-lsp-installer',
+    }
   end
 })

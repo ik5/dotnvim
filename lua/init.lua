@@ -1,5 +1,6 @@
-
-
+--------------------------------------------------
+-- Baseic configuration
+--------------------------------------------------
 require 'base.packages'
 require 'impatient'
 
@@ -9,4 +10,9 @@ require 'base.keymapping'
 require 'base.filetypes'
 require 'base.colorscheme'
 
+------------------------------------------------
+-- Plugins configuration
+------------------------------------------------
+
+require 'plugins.lsp'
 

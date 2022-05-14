@@ -65,3 +65,4 @@ monokai.setup {
         },
     }
 }
+
