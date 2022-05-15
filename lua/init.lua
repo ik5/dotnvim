@@ -15,4 +15,5 @@ require 'base.colorscheme'
 ------------------------------------------------
 
 require 'plugins.lsp'
-
+require 'plugins.lualine'
+require 'plugins.telescope'

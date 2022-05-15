@@ -22,6 +22,11 @@ return require("packer").startup({
     use 'ryanoasis/vim-devicons'
 
     use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
+
+    use {
       "SmiteshP/nvim-gps",
       requires = "nvim-treesitter/nvim-treesitter"
     }
@@ -30,6 +35,18 @@ return require("packer").startup({
     use {
       'neovim/nvim-lspconfig',
       'williamboman/nvim-lsp-installer',
+    }
+
+    -- Fuzzy Finding
+    use {
+      'nvim-telescope/telescope.nvim',
+      requires = {
+        {'nvim-lua/plenary.nvim'},
+        {'nvim-telescope/telescope-symbols.nvim'},
+        {'cljoly/telescope-repo.nvim'},
+        {'gbrlsnchs/telescope-lsp-handlers.nvim'},
+        {'crispgm/telescope-heading.nvim'},
+      },
     }
   end
 })
