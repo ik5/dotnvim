@@ -48,5 +48,13 @@ return require("packer").startup({
         {'crispgm/telescope-heading.nvim'},
       },
     }
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
+    use {
+      'kyazdani42/nvim-tree.lua',
+      requires = {
+        'kyazdani42/nvim-web-devicons', -- optional, for file icon
+      },
+    }
   end
 })
