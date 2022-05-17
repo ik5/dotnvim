@@ -1,3 +1,5 @@
+local map = vim.api.nvim_set_keymap
+local set = vim.keymap.set
 local tree = require('nvim-tree')
 
 tree.setup{
@@ -22,3 +24,5 @@ tree.setup{
     timeout = 400,
   },
 }
+
+set('n', '<f3>', ':NvimTreeToggle<CR>')
