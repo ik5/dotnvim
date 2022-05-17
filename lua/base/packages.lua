@@ -31,6 +31,8 @@ return require("packer").startup({
       requires = "nvim-treesitter/nvim-treesitter"
     }
 
+    use "lukas-reineke/indent-blankline.nvim"
+
     -- LSP
     use {
       'neovim/nvim-lspconfig',
