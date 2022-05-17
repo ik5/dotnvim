@@ -45,6 +45,7 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+--[[
 local monokai = require('monokai')
 local palette = monokai.classic
 -- palette = require('monokai').pro
@@ -72,4 +73,6 @@ monokai.setup {
         },
     }
 }
+--]]
 
+vim.cmd [[ colorscheme monokai ]]
