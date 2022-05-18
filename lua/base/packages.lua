@@ -3,7 +3,7 @@ vim.cmd([[packadd packer.nvim]])
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    autocmd BufWritePost plugins.lua packages.lua source lua/base/packages.lua | PackerCompile
   augroup end
 ]])
 
