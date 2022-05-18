@@ -1,5 +1,5 @@
 --------------------------------------------------
--- Baseic configuration
+-- Basic configuration
 --------------------------------------------------
 require 'base.packages'
 require 'impatient'
@@ -18,3 +18,5 @@ require 'plugins.lsp'
 require 'plugins.lualine'
 require 'plugins.telescope'
 require 'plugins.nvim-tree'
+require 'plugins.indent'
+
