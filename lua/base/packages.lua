@@ -20,6 +20,10 @@ return require("packer").startup({
     use 'kyazdani42/nvim-web-devicons'
     use { 'powerline/fonts', run = './install.sh' }
     use 'ryanoasis/vim-devicons'
+    use {
+      'nvim-treesitter/nvim-treesitter-context',
+      requires = { 'nvim-treesitter/nvim-treesitter' },
+    }
 
     use {
       'nvim-lualine/lualine.nvim',
@@ -31,12 +35,26 @@ return require("packer").startup({
       requires = "nvim-treesitter/nvim-treesitter"
     }
 
+    use {
+      'nvim-treesitter/nvim-treesitter-refactor',
+      requires = "nvim-treesitter/nvim-treesitter"
+    }
+
+    use {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      requires = "nvim-treesitter/nvim-treesitter"
+    }
+
     use "lukas-reineke/indent-blankline.nvim"
 
     -- LSP
     use {
       'neovim/nvim-lspconfig',
       'williamboman/nvim-lsp-installer',
+    }
+
+    use {
+      'ray-x/lsp_signature.nvim',
     }
 
     -- Fuzzy Finding
@@ -52,11 +70,22 @@ return require("packer").startup({
     }
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
+    -- Browsing
+
     use {
       'kyazdani42/nvim-tree.lua',
       requires = {
         'kyazdani42/nvim-web-devicons', -- optional, for file icon
       },
+    }
+
+    use {
+      'akinsho/bufferline.nvim', tag = "v2.*",
+      requires = 'kyazdani42/nvim-web-devicons'
+    }
+
+    use {
+      'simrat39/symbols-outline.nvim',
     }
   end
 })

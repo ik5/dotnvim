@@ -14,9 +14,11 @@ require 'base.colorscheme'
 -- Plugins configuration
 ------------------------------------------------
 
+require 'plugins.treesitter'
 require 'plugins.lsp'
 require 'plugins.lualine'
 require 'plugins.telescope'
 require 'plugins.nvim-tree'
+require 'plugins.outline'
 require 'plugins.indent'
 

@@ -1,10 +1,31 @@
 local lsp_utils = require "lspconfig/util"
-local nvim_lsp = require('lspconfig')
-local nvim_lsp_installer = require("nvim-lsp-installer")
+local nvim_lsp = require 'lspconfig'
+local nvim_lsp_installer = require "nvim-lsp-installer"
+local signature = require 'lsp_signature'
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.formatting = true
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+signature.setup {
+  bind = true, -- This is mandatory, otherwise border config won't get registered.
+  doc_lines = 35,
+  handler_opts = {
+    border = "rounded" -- double, rounded, single, shadow, none
+  },
+  fix_pos = true,
+  transparency =  100,
+  floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
+  floating_window_above_cur_line = true, -- try to place the floating above the current line when possible Note:
+  -- will set to true when fully tested, set to false will use whichever side has more space
+  -- this setting will be helpful if you do not want the PUM and floating win overlap
+  hint_enable = true, -- virtual hint enable
+  hint_prefix = "➣ ",
+  hi_parameter = "LspSignatureActiveParameter", -- how your parameter will be highlight
+  always_trigger = false, -- sometime show signature on new line or in middle of parameter can be confusing, set it to false for #58
+  auto_close_after = nil, -- autoclose signature float win after x sec, disabled if nil.
+  toggle_key = '<M-s>'
+}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -37,7 +58,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-
+  signature.on_attach(client, bufnr)
 end
 
 nvim_lsp_installer.setup({
@@ -325,3 +346,5 @@ nvim_lsp.sqls.setup {
 }
 
 require("nvim-gps").setup {}
+
+
