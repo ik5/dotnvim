@@ -2,10 +2,19 @@ local lsp_utils = require "lspconfig/util"
 local nvim_lsp = require 'lspconfig'
 local nvim_lsp_installer = require "nvim-lsp-installer"
 local signature = require 'lsp_signature'
+local lsp_kind = require 'lspkind'
+local aerial = require 'aerial'
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.formatting = true
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  }
+}
 
 signature.setup {
   bind = true, -- This is mandatory, otherwise border config won't get registered.
@@ -30,6 +39,11 @@ signature.setup {
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  local buf_map = function(bufnr, mode, lhs, rhs, opts)
+    vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
+        silent = true,
+    })
+end
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -58,7 +72,22 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+  vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
+  vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting()")
+  vim.cmd("command! LspCodeAction lua vim.lsp.buf.code_action()")
+  vim.cmd("command! LspHover lua vim.lsp.buf.hover()")
+  vim.cmd("command! LspRename lua vim.lsp.buf.rename()")
+  vim.cmd("command! LspRefs lua vim.lsp.buf.references()")
+  vim.cmd("command! LspTypeDef lua vim.lsp.buf.type_definition()")
+  vim.cmd("command! LspImplementation lua vim.lsp.buf.implementation()")
+  vim.cmd("command! LspDiagPrev lua vim.lsp.diagnostic.goto_prev()")
+  vim.cmd("command! LspDiagNext lua vim.lsp.diagnostic.goto_next()")
+  vim.cmd("command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()")
+  vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
+
   signature.on_attach(client, bufnr)
+  aerial.on_attach(client, bufnr)
 end
 
 nvim_lsp_installer.setup({
@@ -273,18 +302,7 @@ nvim_lsp.gopls.setup {
         undeclaredname = true,
         fillstruct = true,
         stubmethods = true,
-      },
-      codelenses = {
-        generate = true,
-        gc_details = true,
-      },
-      documentation = {
-        hoverKind = 'FullDocumentation',
-        linkTarget = 'pkg.go.dev',
         linksInHover = true,
-      },
-      Navigation = {
-        importShortcut = 'Both',
       },
     },
   },
@@ -345,6 +363,96 @@ nvim_lsp.sqls.setup {
   },
 }
 
+nvim_lsp.intelephense.setup {
+  cmd = { "intelephense", "--stdio" },
+  filetypes = { "php" },
+  settings = {
+    intelephense = {
+      stubs = {
+        "bcmath",
+        "bz2",
+        "calendar",
+        "Core",
+        "curl",
+        "date",
+        "dba",
+        "dom",
+        "enchant",
+        "fileinfo",
+        "filter",
+        "ftp",
+        "gd",
+        "gettext",
+        "hash",
+        "iconv",
+        "imap",
+        "intl",
+        "json",
+        "ldap",
+        "libxml",
+        "mbstring",
+        "mcrypt",
+        "mysql",
+        "mysqli",
+        "password",
+        "pcntl",
+        "pcre",
+        "PDO",
+        "pdo_mysql",
+        "Phar",
+        "readline",
+        "recode",
+        "Reflection",
+        "regex",
+        "session",
+        "SimpleXML",
+        "soap",
+        "sockets",
+        "sodium",
+        "SPL",
+        "standard",
+        "superglobals",
+        "sysvsem",
+        "sysvshm",
+        "tokenizer",
+        "xml",
+        "xdebug",
+        "xmlreader",
+        "xmlwriter",
+        "yaml",
+        "zip",
+        "zlib",
+        "wordpress",
+        "woocommerce",
+        "acf-pro",
+        "wordpress-globals",
+        "wp-cli",
+        "genesis",
+        "polylang"
+      },
+      files = {
+        maxSize = 5000000;
+      };
+    };
+  },
+  requireRootPattern = false,
+  capabilities = capabilities,
+  on_attach = on_attach,
+  root_dir = lsp_utils.root_pattern("*.php", ".git", 'composer.json'),
+  root_patterns = { "*.php", "composer.json" },
+}
+
+nvim_lsp.psalm.setup {
+  cmd = { "psalm-language-server", },
+  filetypes = {"php"},
+  requireRootPattern = false,
+  capabilities = capabilities,
+  on_attach = on_attach,
+  root_dir = lsp_utils.root_pattern("*.php", ".git", 'composer.json'),
+  root_patterns = { "*.php", "composer.json", "psalm.xml", "psalm.xml.dist" },
+}
+
+
 require("nvim-gps").setup {}
 
-
+lsp_kind.init {}

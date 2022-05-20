@@ -45,6 +45,11 @@ return require("packer").startup({
       requires = "nvim-treesitter/nvim-treesitter"
     }
 
+    use {
+      'm-demare/hlargs.nvim',
+      requires = { 'nvim-treesitter/nvim-treesitter' },
+    }
+
     use "lukas-reineke/indent-blankline.nvim"
 
     -- LSP
@@ -55,6 +60,10 @@ return require("packer").startup({
 
     use {
       'ray-x/lsp_signature.nvim',
+    }
+
+    use {
+      'onsails/lspkind.nvim',
     }
 
     -- Fuzzy Finding
@@ -86,6 +95,111 @@ return require("packer").startup({
 
     use {
       'simrat39/symbols-outline.nvim',
+    }
+    use {
+      'stevearc/aerial.nvim',
+    }
+
+    use {
+      "caenrique/swap-buffers.nvim",
+    }
+
+    -- GIT
+    use {
+      'tpope/vim-fugitive',
+    }
+
+    -- Edit
+    use { 'tpope/vim-surround', }
+    use { 'junegunn/vim-easy-align', }
+
+    -- Auto complete
+    use {
+      'hrsh7th/nvim-cmp',
+      requires = {
+        "quangnguyen30192/cmp-nvim-ultisnips",
+      },
+    }
+    use {
+      'hrsh7th/cmp-nvim-lua',
+      requires = {
+        'hrsh7th/nvim-cmp',
+      },
+    }
+    use {
+      'hrsh7th/cmp-omni',
+      requires = {
+        'hrsh7th/nvim-cmp',
+      },
+    }
+    use {
+      'hrsh7th/cmp-buffer',
+      requires = {
+        'hrsh7th/nvim-cmp',
+      },
+    }
+    use {
+      'hrsh7th/cmp-nvim-lsp',
+      requires = {
+        'hrsh7th/nvim-cmp',
+      },
+    }
+
+    use {
+      'hrsh7th/cmp-path',
+      requires = {
+        'hrsh7th/nvim-cmp',
+      },
+    }
+
+    use {
+      'hrsh7th/cmp-cmdline',
+      requires = {
+        'hrsh7th/nvim-cmp',
+      },
+    }
+
+    use {
+      'f3fora/cmp-spell',
+      requires = {
+        'hrsh7th/nvim-cmp',
+      },
+    }
+
+    use {
+      'andersevenrud/cmp-tmux',
+      requires = {
+        'hrsh7th/nvim-cmp',
+      },
+    }
+
+    use {
+      'ray-x/cmp-treesitter',
+      requires = {
+        'hrsh7th/nvim-cmp',
+      },
+    }
+
+    use {
+      'SirVer/ultisnips',
+      requires = {
+        'honza/vim-snippets',
+      },
+    }
+
+    use {
+      "quangnguyen30192/cmp-nvim-ultisnips",
+      requires = {
+        'SirVer/ultisnips',
+        "hrsh7th/nvim-cmp",
+      },
+    }
+
+    use {
+      "octaltree/cmp-look",
+      requires = {
+        'hrsh7th/nvim-cmp',
+      },
     }
   end
 })

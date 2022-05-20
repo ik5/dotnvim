@@ -1,5 +1,6 @@
 local treesitter = require 'nvim-treesitter.configs'
 local treesitter_context = require 'treesitter-context'
+local hlargs = require 'hlargs'
 
 treesitter.setup {
   highlight = {
@@ -103,3 +104,5 @@ treesitter_context.setup {
   enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
   max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
 }
+
+hlargs.setup {}

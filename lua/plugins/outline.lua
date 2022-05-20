@@ -41,4 +41,4 @@ vim.g.symbols_outline = {
   }
 }
 
-vim.keymap.set('n', '<f4>', ':SymbolsOutline<CR>')
+vim.keymap.set('n', '<S-F4>', ':SymbolsOutline<CR>')
