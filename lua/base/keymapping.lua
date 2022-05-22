@@ -2,6 +2,9 @@ local utils = require('utils')
 local global = vim.g
 local map = vim.api.nvim_set_keymap
 local set = vim.keymap.set
+local autocmd = vim.api.nvim_create_autocmd
+local a_cmd = vim.api.nvim_command
+local v_cmd = vim.cmd
 
 local home = utils.home()
 
@@ -40,6 +43,16 @@ set('n', '<C-Down>', '<C-W>j')
 set('n', '<C-Up>', '<C-W>k')
 set('n', '<C-Left>', '<C-W>h')
 set('n', '<C-Right>', '<C-W>l')
+
+set('i', '<C-J>', '<ESC><C-W>j')
+set('i', '<C-K>', '<ESC><C-W>k')
+set('i', '<C-H>', '<ESC><C-W>h')
+set('i', '<C-L>', '<ESC><C-W>l')
+set('i', '<C-Down>', '<ESC><C-W>j')
+set('i', '<C-Up>', '<ESC><C-W>k')
+set('i', '<C-Left>', '<ESC><C-W>h')
+set('i', '<C-Right>', '<ESC><C-W>l')
+
 
 -- Close all windows except the active one
 set('n', '<leader>q', ':only<CR>')
@@ -211,7 +224,7 @@ set('n', ',v', ':vert sfind')
 set('n', ',t', ':tabfind')
 
 --------------------------------
--- Words, paragraphs, lines, 
+-- Words, paragraphs, lines,
 --------------------------------
 
 -- remove the Windows ^M - when the encodings gets messed up
@@ -310,4 +323,24 @@ set('n', '<F8>', ':set invrevins!<CR>')
 -- do it when in insert mode as well (and return to insert mode)
 set('i', '<F8>', '<Esc>:set invrevins!<CR>a')
 
+---------------------------------
+-- ripgrep using normal vim grep
+---------------------------------
 
+set('n', 'gw', [[:silent grep! "\b<C-R><C-W>\b"<CR>:cw<CR>]])
+set('n', 'g/', [[:silent grep!<space>]])
+set('n', 'g*', [[:silent grep! -w <C-R><C-W><space>]])
+set('n', 'ga', [[silent grepadd!<space>]])
+
+if utils.executable('rg') then
+  global.grepprg = [[rg\ --vimgrep\ --no-heading\ -i]]
+  global.grepformat = [[%f:%l:%c:%m,%f:%l:%m]]
+end
+
+v_cmd([[
+augroup Grep
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd QuickFixCmdPost l* lwindow
+augroup END
+]])

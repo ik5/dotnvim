@@ -5,11 +5,13 @@
 vim.cmd [[ command! -nargs=0 Wr exec 'write !sudo tee % > /dev/null' ]]
 
 -- Open new terminal
-vim.cmd [[ command! -nargs=* HTerm split term:///bin/zsh ]]
+vim.cmd [[ command! -nargs=* Term split term:///bin/zsh ]]
 vim.cmd [[ command! -nargs=* VTerm vsplit term:///bin/zsh ]]
 
 vim.cmd [[ command! -range=% FormatJSON <line1>,<line2>!python3 -c
       \"import json, sys, collections; print(json.dumps(json.load(sys.stdin,object_pairs_hook=collections.OrderedDict), indent=2, ensure_ascii=False))" ]]
+
+vim.cmd [[ command! -range=% FormatXML <line1>,<line2>!xmllint --format --pretty 1 -]]
 
 vim.cmd [[ command! -nargs=* -range=% GenerateUUID lua print(require('utils').uuidv4()) ]]
 

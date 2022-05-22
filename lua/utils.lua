@@ -47,4 +47,36 @@ function utils.home()
   return result
 end
 
+function utils.pwd()
+  return vim.fn.getcwd()
+end
+
+function utils.get_venv()
+  local venv = os.getenv("VIRTUAL_ENV")
+  if venv == nil then
+    venv = ''
+  end
+  return venv
+end
+
+function utils.find_python()
+ local  path = utils.get_venv() .. '/bin/python'
+  if utils.executable(path) then
+    return path
+  end
+
+  path = utils.pwd() .. '/' .. path
+  if utils.executable(path) then
+    return path
+  end
+
+  path = '/usr/bin/python'
+  if utils.executable(path) then
+    return path
+  end
+
+  return ''
+end
+
+
 return utils

@@ -6,8 +6,14 @@ local lsp_kind = require 'lspkind'
 local aerial = require 'aerial'
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 capabilities.formatting = true
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.preselectSupport = true
+capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
   properties = {
     'documentation',
@@ -47,6 +53,15 @@ end
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+  if client.resolved_capabilities.document_highlight then
+    vim.api.nvim_exec([[
+      augroup lsp_document_highlight
+      autocmd! * <buffer>
+      autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+      autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+      ]], false)
+  end
 
   -- Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -106,6 +121,7 @@ nvim_lsp_installer.setup({
 nvim_lsp.sumneko_lua.setup {
   capabilities = capabilities,
   on_attach = on_attach,
+  single_file_support = true,
   settings = {
     runtime = {
       version = 'LuaJIT',
@@ -140,6 +156,7 @@ nvim_lsp.sumneko_lua.setup {
 nvim_lsp.ccls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
+  single_file_support = true,
   init_options = {
     compilationDatabaseDirectory = "build",
     index = {
@@ -160,52 +177,8 @@ nvim_lsp.ccls.setup {
   },
 }
 
-nvim_lsp.jedi_language_server.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  markupKindPreferred = 'plaintext',
-  jediSettings = {
-    autoImportModules = {},
-    caseInsensitiveCompletion = true,
-    debug = false,
-  },
-  completion = {
-    disableSnippets = false,
-    resolveEagerly = false,
-
-  },
-  diagnostics = {
-    enable = true,
-    didOpen = true,
-    didChange = true,
-    didSave = true,
-  },
-  hover = {
-    enable = true,
-    disable = {
-      keyword = {
-        all = false,
-        names = {},
-        fullNames = {},
-      },
-    },
-  },
-  workspace = {
-    extraPaths = {},
-    symbols = {
-      maxSymbols = 20,
-      ignoreFolders = {
-        ".nox",
-        ".tox",
-        ".venv",
-        "__pycache__",
-        "venv",
-      },
-    },
-  },
-}
-
 nvim_lsp.lemminx.setup {
+  single_file_support = true,
   on_attach = on_attach,
   filetypes = {
     "xml", "xsd", "xsl", "xslt", "svg", 'wsdl',
@@ -241,6 +214,7 @@ nvim_lsp.lemminx.setup {
 nvim_lsp.gopls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
+  single_file_support = true,
   cmd = {
     "gopls",
     "serve",
@@ -311,6 +285,7 @@ nvim_lsp.gopls.setup {
 nvim_lsp.html.setup {
   capabilities = capabilities,
   on_attach = on_attach,
+  single_file_support = true,
   init_options = {
     configurationSection = { "html", "css", "javascript" },
     embeddedLanguages = {
@@ -330,12 +305,76 @@ nvim_lsp.jsonls.setup {
     single_file_support = true,
   },
   filetypes = { "json", "jsonc", "json5", "hjson" },
+  single_file_support = true,
+}
+
+nvim_lsp.jedi_language_server.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  markupKindPreferred = 'plaintext',
+  cmd = { "jedi-language-server" },
+  filetypes = { 'python' },
+  single_file_support = true,
+  jediSettings = {
+    autoImportModules = {},
+    caseInsensitiveCompletion = true,
+    debug = false,
+  },
+  completion = {
+    disableSnippets = false,
+    resolveEagerly = false,
+
+  },
+  diagnostics = {
+    enable = true,
+    didOpen = true,
+    didChange = true,
+    didSave = true,
+  },
+  hover = {
+    enable = true,
+    disable = {
+      keyword = {
+        all = false,
+        names = {},
+        fullNames = {},
+      },
+    },
+  },
+  workspace = {
+    extraPaths = {},
+    symbols = {
+      maxSymbols = 20,
+      ignoreFolders = {
+        ".nox",
+        ".tox",
+        ".venv",
+        "__pycache__",
+        "venv",
+      },
+    },
+  },
 }
 
 nvim_lsp.pylsp.setup {
   configurationSources = { "pycodestyle" },
   capabilities = capabilities,
   on_attach = on_attach,
+  cmd = { "pylsp" },
+  filetypes = { 'python' },
+  single_file_support = true,
+}
+
+nvim_lsp.pyright.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  cmd = { "pyright-langserver", "--stdio" },
+  filetypes = { 'python' },
+  single_file_support = true,
+
+  analyses = {
+    useLibraryCodeForTypes = true
+  },
 }
 
 nvim_lsp.sorbet.setup {
@@ -344,12 +383,14 @@ nvim_lsp.sorbet.setup {
   filetypes = {
     "ruby",
   },
+  single_file_support = true,
   root_dir = lsp_utils.root_pattern("Gemfile", ".git"),
 }
 
 nvim_lsp.sqlls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
+  single_file_support = true,
   filetypes = {
     "sql", "plsql", "mysql",
   },
@@ -358,6 +399,7 @@ nvim_lsp.sqlls.setup {
 nvim_lsp.sqls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
+  single_file_support = true,
   filetypes = {
     "sql", "plsql", "mysql",
   },
@@ -366,6 +408,7 @@ nvim_lsp.sqls.setup {
 nvim_lsp.intelephense.setup {
   cmd = { "intelephense", "--stdio" },
   filetypes = { "php" },
+  single_file_support = true,
   settings = {
     intelephense = {
       stubs = {
@@ -443,16 +486,98 @@ nvim_lsp.intelephense.setup {
 }
 
 nvim_lsp.psalm.setup {
-  cmd = { "psalm-language-server", },
+  cmd = { "psalm", "--language-server"},
   filetypes = {"php"},
   requireRootPattern = false,
   capabilities = capabilities,
   on_attach = on_attach,
   root_dir = lsp_utils.root_pattern("*.php", ".git", 'composer.json'),
   root_patterns = { "*.php", "composer.json", "psalm.xml", "psalm.xml.dist" },
+  single_file_support = true,
 }
 
+nvim_lsp.phpactor.setup {
+  filetypes = {"php"},
+  requireRootPattern = false,
+  capabilities = capabilities,
+  on_attach = on_attach,
+  single_file_support = true,
+}
+
+nvim_lsp.rust_analyzer.setup {
+  single_file_support = true,
+  capabilities = capabilities,
+  on_attach = on_attach,
+  assist = {
+    importGranularity = "module",
+    expressionFillDefault = "todo",
+    importEnforceGranularity = true,
+    importPrefix = "crate",
+
+  },
+  cargo = {
+    allFeatures = true,
+    loadOutDirsFromCheck = true,
+    autoreload = true,
+    buildScripts = {
+      enable = true,
+    },
+  },
+  procMacro = {
+    enable = true
+  },
+  checkOnSave = {
+    enable = true,
+    command = "clippy"
+  },
+  completion = {
+    autoimport = {
+      enable = true,
+    },
+    autoself = {
+      enable = true,
+    },
+    callable = {
+      snippets = 'fill_arguments',
+    },
+    postfix = {
+      enable = true,
+    },
+  },
+  inlayHints = {
+    lifetimeElisionHints = {
+      enable = true,
+      useParameterNames = true
+    },
+  },
+}
+
+nvim_lsp.handlers = {
+  ['textDocument/publishDiagnostics'] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    {
+      underline = true,
+      virtual_text = {
+        spacing = 5,
+        severity_limit = 'Warning',
+      },
+      update_in_insert = true,
+    }
+  )
+}
 
 require("nvim-gps").setup {}
 
 lsp_kind.init {}
+
+require('rust-tools').setup({
+  tools = {
+    autoSetHints = true,
+    hover_with_actions = true,
+    inlay_hints = {
+      show_parameter_hints = true,
+      parameter_hints_prefix = "",
+      other_hints_prefix = "",
+    },
+  },
+})

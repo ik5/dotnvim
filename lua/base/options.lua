@@ -37,7 +37,7 @@ global.cursorcolumn = false   -- have a column indicate the cursor location
 global.ruler = true           -- Show the line and column number of the cursor position, separated by a comma.
 --[[
 Display a ruler with the length of 60 chars, with the following format:
- - Decimal char value 
+ - Decimal char value
  - Hex char value
  - buffer number
  - [Filetype]
@@ -48,16 +48,16 @@ Display a ruler with the length of 60 chars, with the following format:
 global.rulerformat = '%60(%=%b/0x%B b:%n %y%m%r%w %l/%L->%c%V %P%)'
 global.number = true          -- show line numbers
 global.relativenumber = false -- do not have a relative number
-global.numberwidth = 6        -- minimal number of columns for line number
+window.numberwidth = 3        -- minimal number of columns for line number
 
 global.cindent = true     -- Enables automatic C program indenting.
 global.autoindent = true  -- Copy indent from current line when starting a new line (typing <CR>
-                          -- in Insert mode or when using the "o" or "O" command). 
+                          -- in Insert mode or when using the "o" or "O" command).
 global.smartindent = true -- Do smart autoindenting when starting a new line.
 
 global.showcmd = true  -- Show (partial) command in the last line of the screen.
 
-global.signcolumn = 'yes:4'
+global.signcolumn = 'yes:2' -- how many signs to view
 
 global.errorbells = false -- Do not ring the bell for error messages.
 global.visualbell = true  -- Use visual bell instead of beeping.
@@ -71,7 +71,7 @@ global.titleold = ''      -- set "Terminal" when nvim exists
 global.titlestring=" %F " -- display file full path
 
 global.modeline = false  -- do not execute vim lines in file (security)
-global.modelines = 0     -- read 0 lines to execute 
+global.modelines = 0     -- read 0 lines to execute
 
 -- abbrivate messages,  truncate file message at the stat if it is too long to fit,
 -- don't give the into message when starting, don't give ins-completion-menu mesages,
@@ -99,12 +99,10 @@ global.ttimeoutlen = 50 -- Time in milliseconds to wait for a key code sequence 
 
 global.selection = 'inclusive' -- This option defines the behavior of the selection.
 
-global.viewoptions = 'folds,options,cursor,unix,slash' -- 
+global.viewoptions = 'folds,options,cursor,unix,slash' --
 
 -- virtual editing provides a mean to place the cursor on a non existed char.
-global.virtualedit = 'onemore,block' -- Allow for cursor beyond last character and on block mode
-
-global.iskeyword = '!-~,^*,^|,^",192-255' -- Keywords are used in searching and recognizing with many commands: "w", "*", "[i", etc.
+global.virtualedit = 'onemore,block' -- Allows for cursor beyond last character and on block mode
 
 global.report = 1 -- Threshold for reporting number of lines changed.
 
@@ -113,10 +111,10 @@ global.report = 1 -- Threshold for reporting number of lines changed.
   replacement character defined (see |:syn-cchar|) the character defined in 'listchars' is used.
   It is highlighted with the \"Conceal\" highlight group.
 ]]--
-global.conceallevel = 1 
+global.conceallevel = 1
 -- set listchars -> display a char that represent a case
 window.list = true
-global.listchars = 'tab:→  ,trail:·,extends:›,precedes:‹,nbsp:␣'
+global.listchars = 'tab:  ,trail:·,extends:›,precedes:‹,nbsp:␣'
 global.wildmenu = true                                                       -- show list instead of just completing
 global.wildmode="list:longest,full"                                          -- command <Tab> completion, list matches, then longest common part, then all.
 global.wildignore = '.hg,.git,.svn,.cvn'                                     -- Version control
@@ -129,11 +127,11 @@ global.wildignore = global.wildignore .. ',*.spl'                            -- 
 global.wildignore = global.wildignore .. ',*.sw?'                            -- Vim swap files
 global.wildignore = global.wildignore .. ',*.DS_Store'                       -- IDE
 global.wildignore = global.wildignore .. ',*.rdb'                            -- Redis database file
-global.wildignore = global.wildignore .. ',*.so,*.zip,*.db,*.sqlite*'        -- 
+global.wildignore = global.wildignore .. ',*.so,*.zip,*.db,*.sqlite*'        --
 global.wildignore = global.wildignore .. ',*.o'                              -- object files
 global.wildignore = global.wildignore .. ',vendor/*'                         -- ignore vendor directory
 global.completeopt = 'longest,menu,menuone,noselect,preview'                 -- Just show the menu upon completion (faster)
-global.infercase = true                                                      -- Allow smarter completion by infering the case
+global.infercase = true                                                      -- Allow smarter completion by inferring the case
 global.pumheight=15                                                          -- The maximum height of a completion menu
 
 global.lazyredraw = false -- do update the screen while executing stuff
@@ -145,7 +143,7 @@ global.splitright = true -- Splits to the right
 autocmd('VimResized', {
   pattern = '*',
   callback = function(args)
-    v_cmd([[wincmd =]]) 
+    v_cmd([[wincmd =]])
   end
 })
 
@@ -160,12 +158,12 @@ if (vim.fn.has('clipboard') == 1) then
   if (vim.fn.has('unnamedplus') == 1) then
     clipboard = clipboard .. ',unnamedplus' -- use the '+' register
   end
-  
+
   global.clipboard = clipboard
 end
 
 if vim.fn.has('persistent_undo') == 1 then
---[[ 
+--[[
   When on, Vim automatically saves undo history to an undo file when writing a buffer to a file,
   and restores undo history from the same file on buffer read.
 ]]--
@@ -189,7 +187,7 @@ window.colorcolumn = "80"
 global.timeout = false
 global.ttimeoutlen = 5
 
--- tab length/size, and make it spaces... 
+-- tab length/size, and make it spaces...
 global.tabstop = 2
 global.shiftwidth = 2
 global.expandtab = true
@@ -233,7 +231,7 @@ Sessions
 global.sessionoptions = "blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize"
 
 -- Auto reload files
-autocmd('FocusGained,BufEnter', { 
+autocmd('FocusGained,BufEnter', {
   pattern = '*',
   callback = function(args)
     v_cmd([[ checktime ]])
@@ -261,7 +259,7 @@ if vim.fn.has('diff') then
   - closeoff: When a window is closed where 'diff' is set, and there is only one window remaining in the tab page with 'diff' set, execute :diffoff in that window.
   - iwhite: Ignore changes in amount of white space.
 ]]--
-  global.diffopt = "internal,filler,closeoff,iwhite" 
+  global.diffopt = "internal,filler,closeoff,iwhite"
 end
 
 -- based on https://gist.github.com/lalitmee/c379ee6b5163ac3670cfbca9a356b6bb

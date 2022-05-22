@@ -15,6 +15,7 @@ require 'base.colorscheme'
 ------------------------------------------------
 
 require 'plugins.treesitter'
+require 'plugins.bqf'
 require 'plugins.lsp'
 require 'plugins.lualine'
 require 'plugins.telescope'
@@ -24,4 +25,6 @@ require 'plugins.aerial'
 require 'plugins.indent'
 require 'plugins.cmp'
 require 'plugins.swap_buffers'
-
+require 'plugins.git'
+require 'plugins.go'
+require 'plugins.dap'

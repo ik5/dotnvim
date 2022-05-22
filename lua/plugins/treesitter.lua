@@ -13,9 +13,8 @@ treesitter.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = true
   },
-  ensure_installed = {
-    'markdown',
-    'rst',
+  autotag = {
+    enable = true,
   },
   indent = {
     enable = true,
@@ -105,4 +104,28 @@ treesitter_context.setup {
   max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
 }
 
-hlargs.setup {}
+hlargs.setup {
+  paint_arg_declarations = true,
+  paint_arg_usages = true,
+  hl_priority = 10000,
+  performance = {
+    parse_delay = 1,
+    slow_parse_delay = 50,
+    max_iterations = 400,
+    max_concurrent_partial_parses = 30,
+    debounce = {
+      partial_parse = 3,
+      partial_insert_mode = 100,
+      total_parse = 700,
+      slow_parse = 5000
+    }
+  }
+}
+
+require('nvim-autopairs').setup {
+}
+
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+local cmp = require('cmp')
+cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+

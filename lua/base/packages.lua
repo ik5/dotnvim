@@ -50,6 +50,12 @@ return require("packer").startup({
       requires = { 'nvim-treesitter/nvim-treesitter' },
     }
 
+    use {
+      'windwp/nvim-ts-autotag',
+    }
+
+    use { 'windwp/nvim-autopairs', }
+
     use "lukas-reineke/indent-blankline.nvim"
 
     -- LSP
@@ -65,6 +71,7 @@ return require("packer").startup({
     use {
       'onsails/lspkind.nvim',
     }
+
 
     -- Fuzzy Finding
     use {
@@ -104,9 +111,16 @@ return require("packer").startup({
       "caenrique/swap-buffers.nvim",
     }
 
+    use {'kevinhwang91/nvim-bqf'}
+
     -- GIT
     use {
       'tpope/vim-fugitive',
+    }
+
+    use {
+      'lewis6991/gitsigns.nvim',
+      -- tag = 'release' -- To use the latest release
     }
 
     -- Edit
@@ -201,5 +215,23 @@ return require("packer").startup({
         'hrsh7th/nvim-cmp',
       },
     }
+
+  --[[
+    Programming languages
+  --]]
+
+  -- Golang
+    use { 'fatih/vim-go', }
+  -- rust
+    use { 'simrat39/rust-tools.nvim' }
+
+  --[[
+    Debugging
+  --]]
+
+    use 'mfussenegger/nvim-dap'
+    use {'mfussenegger/nvim-dap-python', requires = {"mfussenegger/nvim-dap"}}
+    use {'leoluz/nvim-dap-go', requires = {"mfussenegger/nvim-dap"}}
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
   end
 })

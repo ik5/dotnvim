@@ -8,9 +8,12 @@ if (vim.fn.has('termguicolors') == 1) then
 
   vim.o.t_8b = '^[[48;2;%lu;%lu;%lum'
   vim.o.t_8f = '^[[38;2;%lu;%lu;%lum'
-
   vim.o.t_Co = 256
   vim.o.termguicolors = true
+  vim.g.t_8b = '^[[48;2;%lu;%lu;%lum'
+  vim.g.t_8f = '^[[38;2;%lu;%lu;%lum'
+  vim.g.t_Co = 256
+
 end
 
 cmd([[

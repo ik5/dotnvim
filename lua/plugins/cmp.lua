@@ -24,14 +24,14 @@ cmp.setup {
     { name = 'nvim_lsp', group_index = 1, },
     { name = 'omni', group_index = 1, },
     { name = 'treesitter', group_index = 1, },
-    { name = 'nvim-lua', group_index = 2, },
-    { name = 'buffer', group_index = 3, },
-    { name = 'path', group_index = 4, },
-    { name = 'cmdline', group_index = 4, },
-    { name = 'spell', group_index = 4, },
-    { name = 'ultisnips', group_index = 3, },
+    { name = 'nvim-lua', group_index = 1, },
+    { name = 'buffer', group_index = 1, },
+    { name = 'path', group_index = 2, },
+    { name = 'cmdline', group_index = 2, },
+    { name = 'spell', group_index = 2, },
+    { name = 'ultisnips', group_index = 1, },
     {
-      name = 'look', group_index = 4,
+      name = 'look', group_index = 2,
       keyword_length = 2,
       option = {
         convert_case = true,
@@ -40,7 +40,7 @@ cmp.setup {
     },
     {
       name = 'tmux',
-      group_index = 5,
+      group_index = 2,
       option = {
         all_panes = true,
         trigger_characters = { '.' },
