@@ -86,11 +86,11 @@ set('n', '<leader>d', ':bd<CR>')
 set('n', '<leader>D', ':b#<bar>bd#<CR>')
 
 -- buffer navigation
-set('n', '<M-d>', ':bn<CR>')          -- toggle between open buffers go to next buffer
-set('n', '<M-a>', ':bp<CR>')          -- toggle between open buffers go to prev buffer
-set('n', '<leader>bfn', ':bn<CR>')    -- toggle between open buffers go to next buffer
-set('n', '<leader>bfp', ':bp<CR>')    -- toggle between open buffers go to prev buffer
-set('n', '<Space>x', ':bn|bd #<CR>')  -- delete next buffer
+set('n', '<M-d>', ':bn<CR>') -- toggle between open buffers go to next buffer
+set('n', '<M-a>', ':bp<CR>') -- toggle between open buffers go to prev buffer
+set('n', '<leader>bfn', ':bn<CR>') -- toggle between open buffers go to next buffer
+set('n', '<leader>bfp', ':bp<CR>') -- toggle between open buffers go to prev buffer
+set('n', '<Space>x', ':bn|bd #<CR>') -- delete next buffer
 
 -- manage current active buffer
 --  toggle between last two buffers
@@ -344,3 +344,5 @@ augroup Grep
   autocmd QuickFixCmdPost l* lwindow
 augroup END
 ]])
+
+set('n', '<leader>gd', '<cmd>split +LspDef<CR>')
