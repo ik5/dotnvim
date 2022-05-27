@@ -1,7 +1,7 @@
 
 vim.g.symbols_outline = {
   highlight_hovered_item = true,
-  show_guides = false,
+  show_guides = true,
   auto_preview = true,
   position = 'right',
   relative_width = true,
@@ -41,4 +41,4 @@ vim.g.symbols_outline = {
   }
 }
 
-vim.keymap.set('n', '<S-F4>', ':SymbolsOutline<CR>')
+vim.keymap.set('n', '<F4>', ':SymbolsOutline<CR>')

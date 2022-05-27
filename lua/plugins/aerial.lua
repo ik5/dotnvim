@@ -26,6 +26,7 @@ aerial.setup {
     "TypeParameter",
     "Package",
   },
+  --[[
   open_automatic = function(bufnr)
     -- Enforce a minimum line count
     return vim.api.nvim_buf_line_count(bufnr) > 80
@@ -34,8 +35,8 @@ aerial.setup {
       -- A useful way to keep aerial closed when closed manually
       and not aerial.was_closed()
   end
-
+  ]]--
 }
 
-vim.keymap.set('n', '<f4>', ':AerialToggle<CR>')
+-- vim.keymap.set('n', '<f4>', ':AerialToggle<CR>')
 
