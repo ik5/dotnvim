@@ -60,8 +60,8 @@ autocmd('FileType', {
   pattern = 'xml',
   callback = function(args)
     buffer.omnifunc = 'xmlcomplete#CompleteTags'
-    vim.g.xml_syntax_folding = 1
-    window.foldmethod = 'syntax'
+    vim.g.xml_syntax_folding = 0
+    window.foldmethod = 'manual'
   end
 })
 
@@ -70,7 +70,7 @@ autocmd('FileType', {
   callback = function(args)
     buffer.omnifunc = 'go#complete#Complete'
     buffer.tabstop = 4
-    buffer.softtabstop = 4 
+    buffer.softtabstop = 4
     buffer.expandtab = false
     buffer.shiftwidth = 4
     window.number = true
@@ -93,7 +93,7 @@ autocmd('FileType', {
       callback = function(args2)
         -- Instead of reverting the cursor to the last position in the buffer, we
         -- set it to the first line when editing a git commit message
-       v_cmd [[ call setpos('.', [0, 1, 1, 0]) ]] 
+       v_cmd [[ call setpos('.', [0, 1, 1, 0]) ]]
        buffer.textwidth = 72
        window.colorcolumn = "72"
       end
@@ -122,7 +122,7 @@ autocmd('FileType', {
   pattern = 'txt,text',
   callback = function(args)
     buffer.tabstop = 2
-    buffer.softtabstop = 2 
+    buffer.softtabstop = 2
     buffer.shiftwidth = 2
     buffer.expandtab = false
   end
@@ -132,7 +132,7 @@ autocmd('FileType', {
   pattern = 'md',
   callback = function(args)
     buffer.tabstop = 2
-    buffer.softtabstop = 2 
+    buffer.softtabstop = 2
     buffer.shiftwidth = 2
     buffer.expandtab = true
     global.filetype = 'markdown'
@@ -143,7 +143,7 @@ autocmd('FileType', {
   pattern = 'markdown',
   callback = function(args)
     buffer.tabstop = 2
-    buffer.softtabstop = 2 
+    buffer.softtabstop = 2
     buffer.shiftwidth = 2
     buffer.expandtab = true
   end
@@ -153,7 +153,7 @@ autocmd('FileType', {
   pattern = 'vim',
   callback = function(args)
     buffer.tabstop = 2
-    buffer.softtabstop = 2 
+    buffer.softtabstop = 2
     buffer.shiftwidth = 2
     buffer.expandtab = true
   end
@@ -180,7 +180,7 @@ autocmd('BufRead,BufNewFile,FileType', {
   pattern = '*.json,json',
   callback = function(args)
     global.filetype = 'json'
-    window.foldmethod='syntax'
+    window.foldmethod='manual'
   end
 })
 
@@ -204,7 +204,7 @@ autocmd('FileType', {
   pattern = 'html,xhtml,xml',
   callback = function(args)
     buffer.tabstop = 2
-    buffer.softtabstop = 2 
+    buffer.softtabstop = 2
     buffer.shiftwidth = 2
     buffer.expandtab = true
   end
@@ -215,7 +215,7 @@ autocmd('FileType,BufRead,BufNewFile', {
   callback = function(args)
     global.filetype = 'scss.css'
     buffer.tabstop = 2
-    buffer.softtabstop = 2 
+    buffer.softtabstop = 2
     buffer.shiftwidth = 2
     buffer.expandtab = true
   end
@@ -226,7 +226,7 @@ autocmd('FileType,BufNewFile,BufRead', {
   callback = function(args)
     global.filetype = 'less'
     buffer.tabstop = 2
-    buffer.softtabstop = 2 
+    buffer.softtabstop = 2
     buffer.shiftwidth = 2
     buffer.expandtab = true
   end
@@ -283,9 +283,9 @@ autocmd('FileType,BufNewFile,BufReadPost', {
   pattern = 'yaml,*yaml,*yml',
   callback = function(args)
     global.filetype = 'yaml'
-    window.foldmethod = 'indent'
+    window.foldmethod = 'manuel'
     buffer.tabstop = 2
-    buffer.softtabstop = 2 
+    buffer.softtabstop = 2
     buffer.shiftwidth = 2
     buffer.expandtab = true
   end
