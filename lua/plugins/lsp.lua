@@ -552,6 +552,45 @@ nvim_lsp.rust_analyzer.setup {
   },
 }
 
+nvim_lsp.yamlls.setup {
+  single_file_support = true,
+  capabilities = capabilities,
+  on_attach = on_attach,
+
+  yaml = {
+    format = {
+      enable = true,
+      singleQuote = false,
+      bracketSpacing = false,
+      proseWrap = true,
+    },
+    validate = true,
+    hover = true,
+    completion = true,
+  },
+}
+
+nvim_lsp.taplo.setup {
+  single_file_support = true,
+  capabilities = capabilities,
+  on_attach = on_attach,
+
+  formatting = {
+    align_entries = true,
+    array_trailing_comma = true,
+    array_auto_collapse = true,
+    compact_arrays = false,
+    compact_inline_tables = false,
+    column_width = 80,
+    indent_tables = false,
+    indent_string = '  ',
+    trailing_newline = true,
+    reorder_keys = false,
+    allowed_blank_lines = 2,
+    crlf = false,
+  },
+}
+
 nvim_lsp.handlers = {
   ['textDocument/publishDiagnostics'] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics,
