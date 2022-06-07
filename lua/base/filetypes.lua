@@ -18,7 +18,6 @@ autocmd('FileType', {
     buffer.softtabstop = 4
     buffer.shiftwidth = 4
     buffer.expandtab = true
-    buffer.autoindent = true
     buffer.commentstring = '# %s'
     buffer.define = [[ ^\s*\(def|class\) ]]
     a_cmd [[ let g:jedi#popup_on_dot=0 ]]
