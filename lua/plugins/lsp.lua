@@ -307,7 +307,7 @@ nvim_lsp.jsonls.setup {
   filetypes = { "json", "jsonc", "json5", "hjson" },
   single_file_support = true,
 }
-
+--[[
 nvim_lsp.jedi_language_server.setup {
   capabilities = capabilities,
   on_attach = on_attach,
@@ -364,7 +364,7 @@ nvim_lsp.pylsp.setup {
   filetypes = { 'python' },
   single_file_support = true,
 }
-
+]]--
 nvim_lsp.pyright.setup {
   capabilities = capabilities,
   on_attach = on_attach,
