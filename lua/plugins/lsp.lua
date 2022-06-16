@@ -485,6 +485,7 @@ nvim_lsp.intelephense.setup {
   root_patterns = { "*.php", "composer.json" },
 }
 
+--[[
 nvim_lsp.psalm.setup {
   cmd = { "psalm", "--language-server"},
   filetypes = {"php"},
@@ -503,6 +504,7 @@ nvim_lsp.phpactor.setup {
   on_attach = on_attach,
   single_file_support = true,
 }
+]]--
 
 nvim_lsp.rust_analyzer.setup {
   single_file_support = true,
