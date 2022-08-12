@@ -119,9 +119,11 @@ return require("packer").startup({
     }
 
     -- Edit
-    use { 'tpope/vim-surround', }
-    use { 'junegunn/vim-easy-align', }
-    use { 'numToStr/Comment.nvim', }
+    use {
+      'tpope/vim-surround',
+      'junegunn/vim-easy-align',
+      'numToStr/Comment.nvim',
+    }
 
     -- Auto complete
     use {
