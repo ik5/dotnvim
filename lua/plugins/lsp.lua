@@ -1,6 +1,7 @@
 local lsp_utils = require "lspconfig/util"
 local nvim_lsp = require 'lspconfig'
-local nvim_lsp_installer = require "nvim-lsp-installer"
+local mason = require "mason"
+local mason_lspconfig = require 'mason-lspconfig'
 local signature = require 'lsp_signature'
 local lsp_kind = require 'lspkind'
 local aerial = require 'aerial'
@@ -105,17 +106,18 @@ end
   aerial.on_attach(client, bufnr)
 end
 
-nvim_lsp_installer.setup({
-  -- automatically detect which servers to install (based on which servers
-  -- are set up via lspconfig)
-  automatic_installation = true,
+mason.setup({
   ui = {
     icons = {
-      server_installed = "✓",
-      server_pending = "➜",
-      server_uninstalled = "✗"
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗"
     }
   }
+})
+
+mason_lspconfig.setup({
+  automatic_installation = true,
 })
 
 nvim_lsp.sumneko_lua.setup {
@@ -614,7 +616,6 @@ lsp_kind.init {}
 require('rust-tools').setup({
   tools = {
     autoSetHints = true,
-    hover_with_actions = true,
     inlay_hints = {
       show_parameter_hints = true,
       parameter_hints_prefix = "",
