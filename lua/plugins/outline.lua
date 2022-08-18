@@ -1,5 +1,7 @@
 
-vim.g.symbols_outline = {
+local symbols_outline = require("symbols-outline")
+
+symbols_outline.setup({
   highlight_hovered_item = true,
   show_guides = true,
   auto_preview = true,
@@ -39,6 +41,12 @@ vim.g.symbols_outline = {
     Operator = {icon = "+", hl = "TSOperator"},
     TypeParameter = {icon = "𝙏", hl = "TSParameter"}
   }
+
+})
+
+--[[
+vim.g.symbols_outline = {
 }
+]]--
 
 vim.keymap.set('n', '<F4>', ':SymbolsOutline<CR>')
