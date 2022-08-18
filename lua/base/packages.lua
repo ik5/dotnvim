@@ -128,68 +128,16 @@ return require("packer").startup({
     -- Auto complete
     use {
       'hrsh7th/nvim-cmp',
-      requires = {
-        "quangnguyen30192/cmp-nvim-ultisnips",
-      },
-    }
-    use {
-      'hrsh7th/cmp-nvim-lua',
-      requires = {
-        'hrsh7th/nvim-cmp',
-      },
-    }
-    use {
-      'hrsh7th/cmp-omni',
-      requires = {
-        'hrsh7th/nvim-cmp',
-      },
-    }
-    use {
-      'hrsh7th/cmp-buffer',
-      requires = {
-        'hrsh7th/nvim-cmp',
-      },
-    }
-    use {
-      'hrsh7th/cmp-nvim-lsp',
-      requires = {
-        'hrsh7th/nvim-cmp',
-      },
-    }
-
-    use {
       'hrsh7th/cmp-path',
-      requires = {
-        'hrsh7th/nvim-cmp',
-      },
-    }
-
-    use {
+      'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-omni',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-cmdline',
-      requires = {
-        'hrsh7th/nvim-cmp',
-      },
-    }
-
-    use {
       'f3fora/cmp-spell',
-      requires = {
-        'hrsh7th/nvim-cmp',
-      },
-    }
-
-    use {
       'andersevenrud/cmp-tmux',
-      requires = {
-        'hrsh7th/nvim-cmp',
-      },
-    }
-
-    use {
       'ray-x/cmp-treesitter',
-      requires = {
-        'hrsh7th/nvim-cmp',
-      },
+      "octaltree/cmp-look",
     }
 
     use {
@@ -204,13 +152,6 @@ return require("packer").startup({
       requires = {
         'SirVer/ultisnips',
         "hrsh7th/nvim-cmp",
-      },
-    }
-
-    use {
-      "octaltree/cmp-look",
-      requires = {
-        'hrsh7th/nvim-cmp',
       },
     }
 
