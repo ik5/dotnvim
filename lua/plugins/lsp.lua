@@ -407,86 +407,6 @@ nvim_lsp.sqls.setup {
   },
 }
 
-nvim_lsp.intelephense.setup {
-  cmd = { "intelephense", "--stdio" },
-  filetypes = { "php" },
-  single_file_support = true,
-  settings = {
-    intelephense = {
-      stubs = {
-        "bcmath",
-        "bz2",
-        "calendar",
-        "Core",
-        "curl",
-        "date",
-        "dba",
-        "dom",
-        "enchant",
-        "fileinfo",
-        "filter",
-        "ftp",
-        "gd",
-        "gettext",
-        "hash",
-        "iconv",
-        "imap",
-        "intl",
-        "json",
-        "ldap",
-        "libxml",
-        "mbstring",
-        "mcrypt",
-        "mysql",
-        "mysqli",
-        "password",
-        "pcntl",
-        "pcre",
-        "PDO",
-        "pdo_mysql",
-        "Phar",
-        "readline",
-        "recode",
-        "Reflection",
-        "regex",
-        "session",
-        "SimpleXML",
-        "soap",
-        "sockets",
-        "sodium",
-        "SPL",
-        "standard",
-        "superglobals",
-        "sysvsem",
-        "sysvshm",
-        "tokenizer",
-        "xml",
-        "xdebug",
-        "xmlreader",
-        "xmlwriter",
-        "yaml",
-        "zip",
-        "zlib",
-        "wordpress",
-        "woocommerce",
-        "acf-pro",
-        "wordpress-globals",
-        "wp-cli",
-        "genesis",
-        "polylang"
-      },
-      files = {
-        maxSize = 5000000;
-      };
-    };
-  },
-  requireRootPattern = false,
-  capabilities = capabilities,
-  on_attach = on_attach,
-  root_dir = lsp_utils.root_pattern("*.php", ".git", 'composer.json'),
-  root_patterns = { "*.php", "composer.json" },
-}
-
 --[[
 nvim_lsp.psalm.setup {
   cmd = { "psalm", "--language-server"},
@@ -498,6 +418,7 @@ nvim_lsp.psalm.setup {
   root_patterns = { "*.php", "composer.json", "psalm.xml", "psalm.xml.dist" },
   single_file_support = true,
 }
+]]--
 
 nvim_lsp.phpactor.setup {
   filetypes = {"php"},
@@ -506,7 +427,6 @@ nvim_lsp.phpactor.setup {
   on_attach = on_attach,
   single_file_support = true,
 }
-]]--
 
 nvim_lsp.rust_analyzer.setup {
   single_file_support = true,
