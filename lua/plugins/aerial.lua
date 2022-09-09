@@ -4,7 +4,7 @@ aerial.setup {
   backends = {
     _ = { "treesitter", "lsp", "markdown", },
   },
-  close_behavior = 'persist',
+  -- attach_mode = 'persist',
   default_direction = 'right',
   default_bindings = true,
   show_guides = true,
