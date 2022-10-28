@@ -4,7 +4,6 @@ local mason = require "mason"
 local mason_lspconfig = require 'mason-lspconfig'
 local signature = require 'lsp_signature'
 local lsp_kind = require 'lspkind'
-local aerial = require 'aerial'
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.formatting = true
@@ -102,7 +101,6 @@ end
   vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
 
   signature.on_attach(client, bufnr)
-  aerial.on_attach(client, bufnr)
 end
 
 mason.setup({

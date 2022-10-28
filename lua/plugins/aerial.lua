@@ -2,13 +2,15 @@ local aerial = require 'aerial'
 
 aerial.setup {
   backends = {
-    _ = { "treesitter", "lsp", "markdown", },
+    "treesitter", "lsp", "markdown",
   },
   -- attach_mode = 'persist',
-  default_direction = 'right',
+  layout = {
+    default_direction = 'right',
+    placement_editor_edge = true,
+  },
   default_bindings = true,
   show_guides = true,
-  placement_editor_edge = true,
   highlight_on_hover = true,
   filter_kind = {
     "Object",
@@ -36,6 +38,11 @@ aerial.setup {
       and not aerial.was_closed()
   end
   ]]--
+    on_attach = function(bufnr)
+    -- Jump forwards/backwards with '{' and '}'
+    vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', {buffer = bufnr})
+    vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', {buffer = bufnr})
+  end
 }
 
 -- vim.keymap.set('n', '<f4>', ':AerialToggle<CR>')
