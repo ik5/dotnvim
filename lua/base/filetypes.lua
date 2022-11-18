@@ -290,10 +290,3 @@ autocmd('FileType,BufNewFile,BufReadPost', {
   end
 })
 
-autocmd('FileType', {
-  pattern = 'php',
-  callback = function(args)
-    v_cmd [[ set iskeyword = "$!-~,^*,^|,^\",192-255"]]
-  end
-})
-
