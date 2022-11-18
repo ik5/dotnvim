@@ -1,7 +1,7 @@
 local cmp = require 'cmp'
 local lspkind = require 'lspkind'
 local ultisnips = require "cmp_nvim_ultisnips"
-
+--[[
 local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
@@ -13,6 +13,7 @@ end
 
 ultisnips.setup {}
 local cmp_ultisnips_mappings = ultisnips.mappings
+--]]
 
 cmp.setup {
   snippet = {
@@ -27,7 +28,7 @@ cmp.setup {
     { name = 'nvim-lua', group_index = 1, },
     { name = 'buffer', group_index = 1, },
     { name = 'path', group_index = 2, },
-    { name = 'cmdline', group_index = 2, },
+ --   { name = 'cmdline', group_index = 2, },
     { name = 'spell', group_index = 2, },
     { name = 'ultisnips', group_index = 1, },
     {
@@ -63,7 +64,7 @@ cmp.setup {
           nvim_lua = "[LUA]",
           path = "[PATH]",
           omni = "[OMNI]",
-          cmdline = "[CMDLINE]",
+  --        cmdline = "[CMDLINE]",
           spell = "[SPELL]",
           tmux = '[TMUX]',
           treesitter = '[TS]',
