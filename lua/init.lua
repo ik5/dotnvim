@@ -1,7 +1,7 @@
 --------------------------------------------------
 -- Basic configuration
 --------------------------------------------------
-require 'base.packages'
+require 'base.plugins'
 require 'impatient'
 
 require 'base.options'
