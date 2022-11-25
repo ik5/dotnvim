@@ -209,6 +209,14 @@ return packer.startup({
   -- rust
     use { 'simrat39/rust-tools.nvim' }
 
+  -- flutter
+  use {
+      'akinsho/flutter-tools.nvim',
+      requires = {
+        'nvim-lua/plenary.nvim',
+      },
+  }
+
   --[[
     Debugging
   --]]
