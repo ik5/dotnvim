@@ -128,7 +128,6 @@ return packer.startup({
         {'crispgm/telescope-heading.nvim'},
       },
     }
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- Browsing
 
@@ -146,9 +145,6 @@ return packer.startup({
 
     use {
       'simrat39/symbols-outline.nvim',
-    }
-    use {
-      'stevearc/aerial.nvim',
     }
 
     use {
