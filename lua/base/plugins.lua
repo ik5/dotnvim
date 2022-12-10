@@ -18,13 +18,6 @@ end
 
 vim.cmd([[packadd packer.nvim]])
 
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua packages.lua source lua/base/packages.lua | PackerCompile
-  augroup end
-]])
-
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
@@ -32,13 +25,7 @@ if not status_ok then
 end
 
 -- Have packer use a popup window
-packer.init {
-  display = {
-    open_fn = function()
-      return require("packer.util").float { border = "rounded" }
-    end,
-  },
-}
+packer.init { }
 
 return packer.startup({
   function()
@@ -59,20 +46,8 @@ return packer.startup({
     }
 
     use {
-    "folke/which-key.nvim",
-    config = function()
-      require("which-key").setup({
-        window = {
-          border = "single"
-        },
-        plugins = {
-          spelling = {
-            enabled = true,
-          },
-        },
-      })
-    end
-  }
+      "folke/which-key.nvim",
+    }
 
     use {
       'nvim-lualine/lualine.nvim',
@@ -128,7 +103,6 @@ return packer.startup({
         {'crispgm/telescope-heading.nvim'},
       },
     }
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- Browsing
 
@@ -146,9 +120,6 @@ return packer.startup({
 
     use {
       'simrat39/symbols-outline.nvim',
-    }
-    use {
-      'stevearc/aerial.nvim',
     }
 
     use {
