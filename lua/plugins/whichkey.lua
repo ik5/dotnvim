@@ -17,8 +17,6 @@ require("which-key").setup({
       z = true,
       g = true,
     },
-    show_help = true,
-    show_keys = true,
   },
 })
 
