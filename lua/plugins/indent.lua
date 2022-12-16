@@ -8,9 +8,6 @@ indent.setup{
   show_trailing_blankline_indent = true,
   use_treesitter = true,
   use_treesitter_scope = true,
-  char = '⸽',
-  char_blankline = '⸽',
-  context_char = '⸽',
-  context_char_blankline =  '⸽',
+  space_char_blankline = " ",
 }
 
