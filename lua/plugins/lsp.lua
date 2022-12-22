@@ -364,16 +364,17 @@ nvim_lsp.pylsp.setup {
   single_file_support = true,
 }
 ]]--
-nvim_lsp.pyright.setup {
+nvim_lsp.pylsp.setup{
   capabilities = capabilities,
   on_attach = on_attach,
-  cmd = { "pyright-langserver", "--stdio" },
+  configurationSources = { 'pylint' },
   filetypes = { 'python' },
   single_file_support = true,
 
   analyses = {
     useLibraryCodeForTypes = true
   },
+
 }
 
 nvim_lsp.sorbet.setup {
