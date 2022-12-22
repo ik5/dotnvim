@@ -104,6 +104,11 @@ return packer.startup({
       },
     }
 
+    use {
+      "folke/todo-comments.nvim",
+      requires = "nvim-lua/plenary.nvim",
+    }
+
     -- Browsing
 
     use {
