@@ -365,16 +365,11 @@ nvim_lsp.pylsp.setup {
 }
 ]]--
 nvim_lsp.pylsp.setup{
+  configurationSources = { 'pylint' },
   capabilities = capabilities,
   on_attach = on_attach,
-  configurationSources = { 'pylint' },
   filetypes = { 'python' },
   single_file_support = true,
-
-  analyses = {
-    useLibraryCodeForTypes = true
-  },
-
 }
 
 nvim_lsp.sorbet.setup {
