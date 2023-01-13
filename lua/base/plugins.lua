@@ -37,7 +37,7 @@ return packer.startup({
     -- Syntax and colors
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use "tanvirtin/monokai.nvim"
-    use 'kyazdani42/nvim-web-devicons'
+    use 'nvim-tree/nvim-web-devicons'
     use { 'powerline/fonts', run = './install.sh' }
     use 'ryanoasis/vim-devicons'
     use {
@@ -112,7 +112,7 @@ return packer.startup({
     -- Browsing
 
     use {
-      'kyazdani42/nvim-tree.lua',
+      'nvim-tree/nvim-tree.lua',
       requires = {
         'kyazdani42/nvim-web-devicons', -- optional, for file icon
       },
