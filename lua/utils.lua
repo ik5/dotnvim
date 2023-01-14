@@ -78,7 +78,7 @@ function utils.find_python()
   return ''
 end
 
-function utils.file_exists(name)
+function utils.is_file_exists(name)
  local f=io.open(name,"r")
   if f~=nil then io.close(f)
     return true
