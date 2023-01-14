@@ -1,3 +1,4 @@
+local local_utils = require "utils"
 local lsp_utils = require "lspconfig/util"
 local nvim_lsp = require 'lspconfig'
 local mason = require "mason"
@@ -135,7 +136,7 @@ nvim_lsp.sumneko_lua.setup {
     diagnostics = {
       enable = true,
       globals = {
-        "hs", "vim", "it", "describe", "before_each", "after_each", "vim",
+        "vim"
       },
       disable = { "lowercase-global" },
       neededFileStatus = {
@@ -152,6 +153,7 @@ nvim_lsp.sumneko_lua.setup {
   }
 }
 
+if local_utils.is_file_exists('/usr/bin/gcc') or local_utils.is_file_exists('/usr/bin/clang') or local_utils.is_file_exists('/usr/bin/llvm') then
 nvim_lsp.ccls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
@@ -175,6 +177,7 @@ nvim_lsp.ccls.setup {
     },
   },
 }
+end
 
 nvim_lsp.lemminx.setup {
   single_file_support = true,
@@ -210,6 +213,7 @@ nvim_lsp.lemminx.setup {
   },
 }
 
+if local_utils.is_file_exists('/usr/bin/go') then
 nvim_lsp.gopls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
@@ -280,6 +284,7 @@ nvim_lsp.gopls.setup {
     },
   },
 }
+end
 
 nvim_lsp.html.setup {
   capabilities = capabilities,
@@ -306,6 +311,8 @@ nvim_lsp.jsonls.setup {
   filetypes = { "json", "jsonc", "json5", "hjson" },
   single_file_support = true,
 }
+
+if local_utils.is_file_exists("/usr/bin/python3") then
 --[[
 nvim_lsp.jedi_language_server.setup {
   capabilities = capabilities,
@@ -371,7 +378,9 @@ nvim_lsp.pylsp.setup{
   filetypes = { 'python' },
   single_file_support = true,
 }
+end
 
+if local_utils.is_file_exists("/usr/bin/ruby") then
 nvim_lsp.sorbet.setup {
   capabilities = capabilities,
   on_attach = on_attach,
@@ -381,25 +390,9 @@ nvim_lsp.sorbet.setup {
   single_file_support = true,
   root_dir = lsp_utils.root_pattern("Gemfile", ".git"),
 }
+end
 
-nvim_lsp.sqlls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  single_file_support = true,
-  filetypes = {
-    "sql", "plsql", "mysql",
-  },
-}
-
-nvim_lsp.sqls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  single_file_support = true,
-  filetypes = {
-    "sql", "plsql", "mysql",
-  },
-}
-
+if local_utils.is_file_exists('/usr/bin/php') then
 --[[
 nvim_lsp.psalm.setup {
   cmd = { "psalm", "--language-server"},
@@ -420,7 +413,9 @@ nvim_lsp.phpactor.setup {
   on_attach = on_attach,
   single_file_support = true,
 }
+end
 
+if local_utils.is_file_exists("/usr/bin/rust") or local_utils.is_file_exists("/usr/bin/rustup") then
 nvim_lsp.rust_analyzer.setup {
   single_file_support = true,
   capabilities = capabilities,
@@ -468,6 +463,7 @@ nvim_lsp.rust_analyzer.setup {
     },
   },
 }
+end
 
 nvim_lsp.yamlls.setup {
   single_file_support = true,
@@ -526,6 +522,7 @@ require("nvim-gps").setup {}
 
 lsp_kind.init {}
 
+if local_utils.is_file_exists("/usr/bin/rust") or local_utils.is_file_exists("/usr/bin/rustup") then
 require('rust-tools').setup({
   tools = {
     autoSetHints = true,
@@ -536,3 +533,4 @@ require('rust-tools').setup({
     },
   },
 })
+end
