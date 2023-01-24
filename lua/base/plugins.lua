@@ -89,6 +89,8 @@ return packer.startup({
       "williamboman/mason-lspconfig.nvim",
       'ray-x/lsp_signature.nvim',
       'onsails/lspkind.nvim',
+      "jose-elias-alvarez/null-ls.nvim",
+      "jay-babu/mason-null-ls.nvim",
     }
 
 
