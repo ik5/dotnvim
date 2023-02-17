@@ -118,40 +118,6 @@ mason_lspconfig.setup({
   automatic_installation = true,
 })
 
-nvim_lsp.sumneko_lua.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  single_file_support = true,
-  settings = {
-    runtime = {
-      version = 'LuaJIT',
-      path = vim.split(package.path, ';'),
-    },
-    workspace = {
-      library = {
-        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-      }
-    },
-    diagnostics = {
-      enable = true,
-      globals = {
-        "vim"
-      },
-      disable = { "lowercase-global" },
-      neededFileStatus = {
-        ["codestyle-check"] = "Any",
-      },
-    },
-    format = {
-      enable = true,
-      defaultConfig = {
-        indent_style = "space",
-        indent_size = "2",
-      }
-    },
-  }
-}
 
 if local_utils.is_file_exists('/usr/bin/gcc') or local_utils.is_file_exists('/usr/bin/clang') or local_utils.is_file_exists('/usr/bin/llvm') then
 nvim_lsp.ccls.setup {

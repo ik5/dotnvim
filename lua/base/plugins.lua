@@ -82,7 +82,7 @@ return packer.startup({
 
     use "lukas-reineke/indent-blankline.nvim"
 
-    -- LSP
+    -- LSP, linter, formatter
     use {
       'neovim/nvim-lspconfig',
       'williamboman/mason.nvim',
@@ -91,6 +91,7 @@ return packer.startup({
       'onsails/lspkind.nvim',
       "jose-elias-alvarez/null-ls.nvim",
       "jay-babu/mason-null-ls.nvim",
+      'mhartington/formatter.nvim',
     }
 
 
