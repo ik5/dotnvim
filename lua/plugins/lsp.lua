@@ -6,6 +6,8 @@ local signature = require 'lsp_signature'
 local lsp_kind = require 'lspkind'
 local capabilities = require('cmp_nvim_lsp').default_capabilities()  -- capabilities of cmp_lsp as part of any LSP
 local formatter = require("formatter")
+local null_ls = require("null-ls")
+local null_ls_mason = require('mason-null-ls')
 
 local on_attach = function(client, bufnr)
   signature.on_attach({
@@ -146,4 +148,16 @@ require('rust-tools').setup({
       other_hints_prefix = "",
     },
   },
+})
+
+null_ls.setup({
+  root_dir = require("null-ls.utils").root_pattern(".null-ls-root", "Makefile", ".git"),
+  null_ls.builtins.diagnostics.curlylint,
+  null_ls.builtins.diagnostics.djlint,
+  null_ls.builtins.diagnostics.mypy,
+  null_ls.builtins.diagnostics.pylint,
+})
+
+null_ls_mason.setup({
+  automatic_setup = true,
 })
