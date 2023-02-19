@@ -161,3 +161,5 @@ null_ls.setup({
 null_ls_mason.setup({
   automatic_setup = true,
 })
+
+null_ls_mason.setup_handlers()
