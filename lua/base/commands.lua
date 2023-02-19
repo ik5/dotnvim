@@ -21,3 +21,4 @@ vim.cmd [[ command! CloseOthers tabonly|only ]]
 vim.cmd [[ command! FixDoubleQuotes %s/“\|”/"/g ]]
 
 vim.cmd [[ command! ToUnixFF :set ff=unix ]]
+

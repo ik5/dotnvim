@@ -11,20 +11,6 @@ global.omnifunc = 'syntaxcomplete#Complete'
 buffer.omnifunc = 'syntaxcomplete#Complete'
 
 autocmd('FileType', {
-  pattern = 'python',
-  callback = function(args)
-    buffer.omnifunc = 'jedi#completions'
-    buffer.tabstop = 4
-    buffer.softtabstop = 4
-    buffer.shiftwidth = 4
-    buffer.expandtab = true
-    buffer.commentstring = '# %s'
-    buffer.define = [[ ^\s*\(def|class\) ]]
-    a_cmd [[ let g:jedi#popup_on_dot=0 ]]
-  end
-})
-
-autocmd('FileType', {
   pattern = 'javascript',
   callback = function(args)
     buffer.omnifunc = 'javascriptcomplete#CompleteJS'
