@@ -153,7 +153,6 @@ require('rust-tools').setup({
 
 null_ls.setup({
   root_dir = require("null-ls.utils").root_pattern(".null-ls-root", "Makefile", ".git"),
-  null_ls.builtins.diagnostics.curlylint,
   null_ls.builtins.diagnostics.djlint,
   null_ls.builtins.diagnostics.mypy.with({
     condition = function(utils)
