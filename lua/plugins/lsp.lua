@@ -9,6 +9,7 @@ local formatter = require("formatter")
 local null_ls = require("null-ls")
 local null_ls_utils = require('null-ls.utils')
 local null_ls_mason = require('mason-null-ls')
+local utils = require('utils')
 
 local on_attach = function(client, bufnr)
   signature.on_attach({
@@ -102,6 +103,10 @@ lsp_servers = {
   'clangd', 'lemminx', 'gopls', 'html', 'jsonls', 'rust_analyzer', 'yamlls',
   'taplo', 'pyright',
 }
+
+if utils.is_file_exists('/usr/bin/php') then
+  table.insert(lsp_servers, 'intelephense')
+end
 
 mason_lspconfig.setup({
   ensure_installed = lsp_servers,
