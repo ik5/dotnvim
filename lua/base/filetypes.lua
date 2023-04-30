@@ -268,7 +268,6 @@ autocmd('FileType,BufNewFile,BufReadPost', {
   pattern = 'yaml,*yaml,*yml',
   callback = function(args)
     global.filetype = 'yaml'
-    window.foldmethod = 'manuel'
     buffer.tabstop = 2
     buffer.softtabstop = 2
     buffer.shiftwidth = 2
