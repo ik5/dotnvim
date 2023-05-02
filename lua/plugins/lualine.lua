@@ -8,8 +8,8 @@ TODO:
 
 
 local lualine = require('lualine')
-local gps = require("nvim-gps")
 local bufferline = require('bufferline')
+local navic = require("nvim-navic")
 
 lualine.setup{
   options = {
@@ -57,8 +57,9 @@ lualine.setup{
         }
       },
       {
-        gps.get_location,
-        cond = gps.is_available,
+        "navic",
+        color_correction = nil,
+        navic_opts = nil,
       },
     },
     lualine_x = {
@@ -100,8 +101,9 @@ lualine.setup{
     lualine_c = {
       {'filename'},
       {
-        gps.get_location,
-        cond = gps.is_available,
+        "navic",
+        color_correction = nil,
+        navic_opts = nil,
       },
     },
     lualine_x = {'location'},
