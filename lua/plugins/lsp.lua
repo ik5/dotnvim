@@ -9,6 +9,7 @@ local formatter = require("formatter")
 local null_ls = require("null-ls")
 local null_ls_utils = require('null-ls.utils')
 local null_ls_mason = require('mason-null-ls')
+local navic = require("nvim-navic")
 local utils = require('utils')
 
 local on_attach = function(client, bufnr)
@@ -18,6 +19,10 @@ local on_attach = function(client, bufnr)
         border = "rounded"
       }
     }, bufnr)
+
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
 
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   -- Mappings.
@@ -142,7 +147,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
   }
 )
 
-require("nvim-gps").setup {}
 formatter.setup {}
 
 require('rust-tools').setup({
