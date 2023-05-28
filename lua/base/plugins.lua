@@ -185,7 +185,13 @@ return packer.startup({
   --]]
 
   -- Golang
-    use { 'fatih/vim-go', }
+    -- use { 'fatih/vim-go', }
+    use {
+      'ray-x/go.nvim',
+      requires = {
+        'ray-x/guihua.lua' -- recommended if need floating window support
+      }
+    }
   -- rust
     use { 'simrat39/rust-tools.nvim' }
 
