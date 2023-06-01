@@ -172,6 +172,7 @@ return packer.startup({
       'ray-x/cmp-treesitter',
       'octaltree/cmp-look',
       'saadparwaiz1/cmp_luasnip',
+      "rcarriga/cmp-dap",
     }
 
     -- snippets
@@ -212,10 +213,29 @@ return packer.startup({
     Debugging
   --]]
 
-    use 'mfussenegger/nvim-dap'
-    use {'mfussenegger/nvim-dap-python', requires = {"mfussenegger/nvim-dap"}}
-    use {'leoluz/nvim-dap-go', requires = {"mfussenegger/nvim-dap"}}
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    use {
+      'mfussenegger/nvim-dap',
+    }
+    use {
+      "rcarriga/nvim-dap-ui",
+      requires = {
+        "mfussenegger/nvim-dap"
+      },
+    }
+    use {
+      'theHamsta/nvim-dap-virtual-text',
+      requires = {
+        "mfussenegger/nvim-dap",
+        'nvim-treesitter/nvim-treesitter',
+      },
+    }
+    use {
+      'jay-babu/mason-nvim-dap.nvim',
+      requires = {
+        'williamboman/mason.nvim',
+        'mfussenegger/nvim-dap'
+      },
+    }
 
     if PACKER_BOOTSTRAP then
       require('packer').sync()
