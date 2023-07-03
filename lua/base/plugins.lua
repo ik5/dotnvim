@@ -139,7 +139,7 @@ return packer.startup({
     -- GIT
     -- use { 'tpope/vim-fugitive', }
     use {
-      'TimUntersberger/neogit',
+      'NeogitOrg/neogit',
       requires = {
         'nvim-lua/plenary.nvim',
         'sindrets/diffview.nvim',
