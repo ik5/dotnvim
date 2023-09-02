@@ -48,10 +48,14 @@ local kind_icons = {
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup {
+  enabled = function()
+    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+        or require("cmp_dap").is_dap_buffer()
+  end,
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body) -- For `luasnip` users.
-    end,
+    end
   },
   mapping = {
     ["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -100,11 +104,12 @@ cmp.setup {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
       -- Kind icons
-      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-      -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+      -- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+      vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
         nvim_lua = "[LUA]",
+        buffer = '[BUF]',
         path = "[PATH]",
         omni = "[OMNI]",
         cmdline = "[CMDLINE]",
@@ -113,6 +118,8 @@ cmp.setup {
         treesitter = '[TS]',
         luasnip = '[SNIPS]',
         look = '[LOOK]',
+        omnini = '[OMNI]',
+        emoji = '[EMOJI]',
       })[entry.source.name]
       return vim_item
     end,
@@ -143,5 +150,11 @@ cmp.setup {
     ghost_text = false,
     native_menu = false,
   },
+
 }
 
+cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+    sources = {
+      { name = "dap" },
+    },
+  })

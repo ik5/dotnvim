@@ -3,222 +3,133 @@
 local fn = vim.fn
 
 -- Automatically install packer
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+local install_path = fn.stdpath "data" .. "/site/pack/packer/start/lazy.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
   PACKER_BOOTSTRAP = fn.system {
     "git",
     "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
     install_path,
   }
-  print "Installing packer close and reopen Neovim..."
+  print "Installing lazy.nvim close and reopen Neovim..."
 end
 
-vim.cmd([[packadd packer.nvim]])
+require("lazy").setup({
+  { "lewis6991/impatient.nvim" },
+  { "folke/lazy.nvim" },
+  { 'nvim-lua/plenary.nvim' },
+  { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
+  { "tanvirtin/monokai.nvim" },
+  { 'powerline/fonts', run = './install.sh' },
+  {'ryanoasis/vim-devicons'},
+  { 'nvim-treesitter/nvim-treesitter' },
+  { 'nvim-treesitter/nvim-treesitter-context' },
+  { "folke/which-key.nvim" },
+  { 'nvim-lualine/lualine.nvim' },
+  { "SmiteshP/nvim-navic" },
+  { "nvim-treesitter/nvim-treesitter"},
+  { 'nvim-treesitter/nvim-treesitter-refactor' },
+  { 'nvim-treesitter/nvim-treesitter-textobjects' },
+  { 'm-demare/hlargs.nvim' },
+  { 'windwp/nvim-ts-autotag' },
+  { 'windwp/nvim-autopairs', },
+  {"lukas-reineke/indent-blankline.nvim"},
+  { 'neovim/nvim-lspconfig'},
+  {'williamboman/mason.nvim'},
+  {"williamboman/mason-lspconfig.nvim"},
+  {'ray-x/lsp_signature.nvim'},
+  {'onsails/lspkind.nvim'},
+  {"jose-elias-alvarez/null-ls.nvim"},
+  {"jay-babu/mason-null-ls.nvim"},
+  {'mhartington/formatter.nvim'},
 
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-  return
-end
+  {'nvim-telescope/telescope-symbols.nvim'},
+  {'cljoly/telescope-repo.nvim'},
+  {'gbrlsnchs/telescope-lsp-handlers.nvim'},
+  {'crispgm/telescope-heading.nvim'},
 
--- Have packer use a popup window
-packer.init { }
+  { 'nvim-telescope/telescope.nvim' },
 
-return packer.startup({
-  function()
-    -- Base
-    use "lewis6991/impatient.nvim"
-    use "wbthomason/packer.nvim"
-    use 'nvim-lua/plenary.nvim'
+  { "folke/todo-comments.nvim", },
+  { 'kyazdani42/nvim-web-devicons', },
 
-    -- Syntax and colors
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    use "tanvirtin/monokai.nvim"
-    use 'nvim-tree/nvim-web-devicons'
-    use { 'powerline/fonts', run = './install.sh' }
-    use 'ryanoasis/vim-devicons'
-    use {
-      'nvim-treesitter/nvim-treesitter-context',
-      requires = { 'nvim-treesitter/nvim-treesitter' },
-    }
+  { 'nvim-tree/nvim-tree.lua', },
 
-    use {
-      "folke/which-key.nvim",
-    }
+  { 'akinsho/bufferline.nvim', version = "*" },
 
-    use {
-      'nvim-lualine/lualine.nvim',
-      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-    }
+  { 'simrat39/symbols-outline.nvim', },
 
-    use {
-      "SmiteshP/nvim-navic",
-      requires = "neovim/nvim-lspconfig"
-    }
+  { "caenrique/swap-buffers.nvim", },
 
-    use {
-      'nvim-treesitter/nvim-treesitter-refactor',
-      requires = "nvim-treesitter/nvim-treesitter"
-    }
+  {'kevinhwang91/nvim-bqf'},
 
-    use {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      requires = "nvim-treesitter/nvim-treesitter"
-    }
+  -- GIT
+  -- use { 'tpope/vim-fugitive', }
+  {'sindrets/diffview.nvim'},
+  { 'NeogitOrg/neogit', },
 
-    use {
-      'm-demare/hlargs.nvim',
-      requires = { 'nvim-treesitter/nvim-treesitter' },
-    }
+  { 'lewis6991/gitsigns.nvim', },
 
-    use {
-      'windwp/nvim-ts-autotag',
-    }
+  -- Edit
+  { 'tpope/vim-surround'},
+  {'junegunn/vim-easy-align'},
+  {'numToStr/Comment.nvim'},
 
-    use { 'windwp/nvim-autopairs', }
+  -- Auto complete
+  { 'hrsh7th/nvim-cmp' },
+  {'hrsh7th/cmp-path'},
+  {'hrsh7th/cmp-nvim-lua'},
+  {'hrsh7th/cmp-omni'},
+  {'hrsh7th/cmp-buffer'},
+  {'hrsh7th/cmp-nvim-lsp'},
+  {'hrsh7th/cmp-cmdline'},
+  {'f3fora/cmp-spell'},
+  {'andersevenrud/cmp-tmux'},
+  {'ray-x/cmp-treesitter'},
+  {'octaltree/cmp-look'},
+  {'saadparwaiz1/cmp_luasnip'},
+  {"rcarriga/cmp-dap"},
 
-    use "lukas-reineke/indent-blankline.nvim"
+  -- snippets
+  { --snippet engine
+  'L3MON4D3/LuaSnip',
+  build = "make install_jsregexp",
+  },
+   { -- a bunch of snippets to use
+    'rafamadriz/friendly-snippets',
+  },
+  {'hrsh7th/nvim-cmp'},
+  {'saadparwaiz1/cmp_luasnip', },
 
-    -- LSP, linter, formatter
-    use {
-      'neovim/nvim-lspconfig',
-      'williamboman/mason.nvim',
-      "williamboman/mason-lspconfig.nvim",
-      'ray-x/lsp_signature.nvim',
-      'onsails/lspkind.nvim',
-      "jose-elias-alvarez/null-ls.nvim",
-      "jay-babu/mason-null-ls.nvim",
-      'mhartington/formatter.nvim',
-    }
+--[[
+Programming languages
+--]]
 
-
-    -- Fuzzy Finding
-    use {
-      'nvim-telescope/telescope.nvim',
-      requires = {
-        {'nvim-lua/plenary.nvim'},
-        {'nvim-telescope/telescope-symbols.nvim'},
-        {'cljoly/telescope-repo.nvim'},
-        {'gbrlsnchs/telescope-lsp-handlers.nvim'},
-        {'crispgm/telescope-heading.nvim'},
-      },
-    }
-
-    use {
-      "folke/todo-comments.nvim",
-      requires = "nvim-lua/plenary.nvim",
-    }
-
-    -- Browsing
-
-    use {
-      'nvim-tree/nvim-tree.lua',
-      requires = {
-        'kyazdani42/nvim-web-devicons', -- optional, for file icon
-      },
-    }
-
-    use {
-      'akinsho/bufferline.nvim', tag = "v2.*",
-      requires = 'kyazdani42/nvim-web-devicons'
-    }
-
-    use {
-      'simrat39/symbols-outline.nvim',
-    }
-
-    use {
-      "caenrique/swap-buffers.nvim",
-    }
-
-    use {'kevinhwang91/nvim-bqf'}
-
-    -- GIT
-    -- use { 'tpope/vim-fugitive', }
-    use {
-      'TimUntersberger/neogit',
-      requires = {
-        'nvim-lua/plenary.nvim',
-        'sindrets/diffview.nvim',
-      }
-    }
-
-    use {
-      'lewis6991/gitsigns.nvim',
-      -- tag = 'release' -- To use the latest release
-    }
-
-    -- Edit
-    use {
-      'tpope/vim-surround',
-      'junegunn/vim-easy-align',
-      'numToStr/Comment.nvim',
-    }
-
-    -- Auto complete
-    use {
-      'hrsh7th/nvim-cmp',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-nvim-lua',
-      'hrsh7th/cmp-omni',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-cmdline',
-      'f3fora/cmp-spell',
-      'andersevenrud/cmp-tmux',
-      'ray-x/cmp-treesitter',
-      'octaltree/cmp-look',
-      'saadparwaiz1/cmp_luasnip',
-    }
-
-    -- snippets
-    use { --snippet engine
-      'L3MON4D3/LuaSnip',
-      requires = {
-        'rafamadriz/friendly-snippets', -- a bunch of snippets to use
-        'hrsh7th/nvim-cmp',
-        'saadparwaiz1/cmp_luasnip',
-      },
-      run = "make install_jsregexp",
-    }
-
-  --[[
-    Programming languages
-  --]]
-
-  -- Golang
-    -- use { 'fatih/vim-go', }
-    use {
-      'ray-x/go.nvim',
-      requires = {
-        'ray-x/guihua.lua' -- recommended if need floating window support
-      }
-    }
+-- Golang
+-- use { 'fatih/vim-go', }
+  { 'ray-x/guihua.lua' -- recommended if need floating window support
+    },
+{
+  'ray-x/go.nvim',
+  },
   -- rust
-    use { 'simrat39/rust-tools.nvim' }
+  { 'simrat39/rust-tools.nvim' },
 
   -- flutter
-  use {
-      'akinsho/flutter-tools.nvim',
-      requires = {
-        'nvim-lua/plenary.nvim',
-      },
-  }
+  {
+    'akinsho/flutter-tools.nvim',
+  },
 
   --[[
-    Debugging
+  Debugging
   --]]
 
-    use 'mfussenegger/nvim-dap'
-    use {'mfussenegger/nvim-dap-python', requires = {"mfussenegger/nvim-dap"}}
-    use {'leoluz/nvim-dap-go', requires = {"mfussenegger/nvim-dap"}}
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+  { 'mfussenegger/nvim-dap', },
+  { "rcarriga/nvim-dap-ui", },
+  { 'theHamsta/nvim-dap-virtual-text', },
+  { 'jay-babu/mason-nvim-dap.nvim', }
 
-    if PACKER_BOOTSTRAP then
-      require('packer').sync()
-    end
-  end
 })
+
