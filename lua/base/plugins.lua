@@ -43,7 +43,7 @@ require("lazy").setup({
   {'onsails/lspkind.nvim'},
   {"jose-elias-alvarez/null-ls.nvim"},
   {"jay-babu/mason-null-ls.nvim"},
-  '{mhartington/formatter.nvim',
+  {'mhartington/formatter.nvim'},
 
   {'nvim-telescope/telescope-symbols.nvim'},
   {'cljoly/telescope-repo.nvim'},
@@ -97,12 +97,11 @@ require("lazy").setup({
   'L3MON4D3/LuaSnip',
   build = "make install_jsregexp",
   },
-   {
-    'rafamadriz/friendly-snippets', -- a bunch of snippets to use
-  }
+   { -- a bunch of snippets to use
+    'rafamadriz/friendly-snippets',
+  },
   {'hrsh7th/nvim-cmp'},
   {'saadparwaiz1/cmp_luasnip', },
-},
 
 --[[
 Programming languages
@@ -130,7 +129,7 @@ Programming languages
   { 'mfussenegger/nvim-dap', },
   { "rcarriga/nvim-dap-ui", },
   { 'theHamsta/nvim-dap-virtual-text', },
-  { 'jay-babu/mason-nvim-dap.nvim', },
+  { 'jay-babu/mason-nvim-dap.nvim', }
 
 })
 
