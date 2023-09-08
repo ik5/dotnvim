@@ -1,25 +1,5 @@
 local fn = vim.fn
 
--- Automatically install paq
-local function bootstrap_paq()
-  local paq_path = fn.stdpath("data") .. "site/pack/paqs/start/paq-nvim"
-
-  if not vim.loop.fs_stat(paq_path) then
-    fn.system({
-      'git',
-      'clone',
-      "--depth=1",
-      'https://github.com/savq/paq-nvim.git',
-      pckr_path
-    })
-  print "Installing paq.nvim close and reopen Neovim..."
-  end
-
-  vim.opt.rtp:prepend(paq_path)
-end
-
-bootstrap_paq()
-
 require "paq" {
   {"savq/paq-nvim"},
   { 'nvim-lua/plenary.nvim' },
@@ -70,7 +50,7 @@ require "paq" {
   { 'NeogitOrg/neogit', },
   { 'lewis6991/gitsigns.nvim', },
   { 'ray-x/guihua.lua' },
-  
+
   -- Edit
   { 'tpope/vim-surround'},
   {'junegunn/vim-easy-align'},
