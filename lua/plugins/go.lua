@@ -1,5 +1,6 @@
 local go_nvim = require 'go'
 local cfg = vim.g
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 go_nvim.setup {
   goimport = 'gopls', -- if set to 'gopls' will use golsp format
@@ -9,16 +10,9 @@ go_nvim.setup {
   tag_transform = false,
   test_dir = '',
   comment_placeholder = ' <>  ',
-  lsp_cfg = true, -- false: do not use.
-                  -- true: apply non-default gopls setup defined in go/lsp.lua
-                  -- if lsp_cfg is a table, merge table with with non-default gopls setup in go/lsp.lua, e.g.
-  lsp_gofumpt = false, -- true: set default gofmt in gopls format to gofumpt
-  lsp_on_attach = nil, -- nil: do nothing
-                       -- if lsp_on_attach is a function: use this function as on_attach function for gopls,
-                       -- when lsp_cfg is true
-  lsp_keymaps = true, -- true: apply default lsp keymaps
-  lsp_codelens = true,
-  lsp_diag_hdlr = true, -- hook lsp diag handler
+  lsp_cfg = {
+    capabilities = capabilities,
+  },
   lsp_inlay_hints = {
     enable = true,
 
@@ -71,10 +65,20 @@ go_nvim.setup {
   gopls_cmd = nil, --- you can provide gopls path and cmd if it not in PATH, e.g. cmd = {  "/home/ray/.local/nvim/data/lspinstall/go/gopls" }
   build_tags = "", --- you can provide extra build tags for tests or debugger
   test_runner = "go", -- one of {`go`, `richgo`, `dlv`, `ginkgo`}
-  run_in_floaterm = false, -- set to true to run in float window.
   luasnip = true, -- set false to disable
   icons = { breakpoint = "🧘", currentpos = "🏃" }, -- set to false to disable this option
+  trouble = true, -- true: use trouble to open quickfix
+  iferr_vertical_shift = 4, -- defines where the cursor will end up vertically from the begining of if err statement after GoIfErr command
 }
+
+local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+   require('go.format').goimport()
+  end,
+  group = format_sync_grp,
+})
 
 --[[ Do not use Faith's vim-go settings, will be removed after configuring new vim plugin
 cfg.go_template_autocreate = 0
@@ -116,5 +120,6 @@ cfg.go_highlight_variable_declarations = 1
 cfg.go_highlight_variable_assignments = 1
 
 ]]--
+
 
 

@@ -109,11 +109,15 @@ Programming languages
 
 -- Golang
 -- use { 'fatih/vim-go', }
-  { 'ray-x/guihua.lua' -- recommended if need floating window support
+  {
+    'ray-x/go.nvim',
+    dependencies = {  -- optional packages
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
     },
-{
-  'ray-x/go.nvim',
   },
+
   -- rust
   { 'simrat39/rust-tools.nvim' },
 
