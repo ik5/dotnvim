@@ -6,9 +6,6 @@ local signature = require 'lsp_signature'
 local lsp_kind = require 'lspkind'
 local capabilities = require('cmp_nvim_lsp').default_capabilities()  -- capabilities of cmp_lsp as part of any LSP
 local formatter = require("formatter")
-local null_ls = require("null-ls")
-local null_ls_utils = require('null-ls.utils')
-local null_ls_mason = require('mason-null-ls')
 local navic = require("nvim-navic")
 local utils = require('utils')
 
@@ -160,30 +157,4 @@ require('rust-tools').setup({
   },
 })
 
-null_ls.setup({
-  root_dir = require("null-ls.utils").root_pattern(".null-ls-root", "Makefile", ".git"),
-  null_ls.builtins.diagnostics.djlint,
-  null_ls.builtins.diagnostics.mypy.with({
-    condition = function(utils)
-      return utils.root_has_file('mypy.ini')
-    end,
-    env = function(params)
-      return { PYHONPATH = params.root }
-    end,
-    command = { '/usr/bin/pipenv', 'run', 'mypy', },
-  }),
-  null_ls.builtins.diagnostics.pylint.with({
-    condition = function(utils)
-      return utils.root_has_file('.pylintrc')
-    end,
-    env = function(params)
-      return { PYHONPATH = params.root }
-    end,
-    command = { '/usr/bin/pipenv', 'run', 'pylint', },
-  }),
-})
-
-null_ls_mason.setup({
-  automatic_setup = true,
-})
 

@@ -2,7 +2,6 @@
 -- Basic configuration
 --------------------------------------------------
 require 'base.plugins'
-require 'impatient'
 
 require 'base.options'
 require 'base.commands'
