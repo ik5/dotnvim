@@ -1,8 +1,21 @@
 local go_nvim = require 'go'
 local cfg = vim.g
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(
+  vim.lsp.protocol.make_client_capabilities()
+)
 
 go_nvim.setup {
+  goimport = 'gopls', -- if set to 'gopls' will use golsp format
+  gofmt = 'gopls', -- if set to gopls will use golsp format
+  fillstruct = "gopls",
+  lsp_cfg = {
+    capabilities = capabilities,
+  },
+  luasnip = true, -- set false to disable
+  icons = { breakpoint = "🧘", currentpos = "🏃" }, -- set to false to disable this option
+  trouble = true, -- true: use trouble to open quickfix
+  iferr_vertical_shift = 4, -- defines where the cursor will end up vertically from the begining of if err statement after GoIfErr command
+--[[
   goimport = 'gopls', -- if set to 'gopls' will use golsp format
   gofmt = 'gopls', -- if set to gopls will use golsp format
   fillstruct = "gopls",
@@ -78,7 +91,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
    require('go.format').goimport()
   end,
   group = format_sync_grp,
-})
+--]]
+}
 
 --[[ Do not use Faith's vim-go settings, will be removed after configuring new vim plugin
 cfg.go_template_autocreate = 0

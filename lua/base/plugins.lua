@@ -44,12 +44,12 @@ require "paq" {
   { 'simrat39/symbols-outline.nvim', },
   { "caenrique/swap-buffers.nvim", },
   { "SmiteshP/nvim-navic" },
+  { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
 
   -- VCS
   {'sindrets/diffview.nvim'},
   { 'NeogitOrg/neogit', },
   { 'lewis6991/gitsigns.nvim', },
-  { 'ray-x/guihua.lua' },
 
   -- Edit
   { 'tpope/vim-surround'},
