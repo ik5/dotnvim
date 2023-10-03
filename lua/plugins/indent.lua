@@ -24,7 +24,9 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
     vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
 end)
 
-indent.setup{
+indent.setup({
+  enabled = true,
+  --[[
   show_current_context = true,
   show_current_context_start = true,
   show_first_indent_level = false,
@@ -32,8 +34,19 @@ indent.setup{
   use_treesitter = true,
   use_treesitter_scope = true,
   space_char_blankline = " ",
+  ]]--
   indent = {
     highlight = highlight,
+    char = "▎",
+    tab_char = "▎",
   },
-}
-
+  whitespace = {
+    highlight = highlight,
+    remove_blankline_trail = true,
+  },
+  scope = {
+    enabled = false,
+    show_start = true,
+    show_end = true,
+  },
+ })
