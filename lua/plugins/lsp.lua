@@ -1,5 +1,6 @@
-local lsp_utils = require "lspconfig/util"
 local nvim_lsp = require 'lspconfig'
+local configs = require 'lspconfig/configs'
+local lsp_utils = require "lspconfig/util"
 local mason = require "mason"
 local mason_lspconfig = require 'mason-lspconfig'
 local signature = require 'lsp_signature'
@@ -109,6 +110,21 @@ lsp_servers = {
 if utils.is_file_exists('/usr/bin/php') then
   table.insert(lsp_servers, 'intelephense')
 end
+
+if not configs.golangcilsp then
+ 	configs.golangcilsp = {
+		default_config = {
+			cmd = {'golangci-lint-langserver'},
+			root_dir = lsp_utils.root_pattern('.git', 'go.mod'),
+			init_options = {
+					command = { "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json", "--issues-exit-code=1" };
+			}
+		};
+	}
+end
+nvim_lsp.golangci_lint_ls.setup {
+	filetypes = {'go','gomod'}
+}
 
 mason_lspconfig.setup({
   ensure_installed = lsp_servers,
