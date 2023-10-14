@@ -231,13 +231,12 @@ Sessions
 global.sessionoptions = "blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize"
 
 -- Auto reload files
-autocmd('FocusGained,BufEnter', {
+autocmd({'FocusGained', 'BufEnter'}, {
   pattern = '*',
-  callback = function(args)
+  callback = function(args) --]]
     v_cmd([[ checktime ]])
   end
 })
-
 
 global.hidden = true -- do not lose information on abondon buffers
                      -- (and not hide the actual buffer, moved to different

@@ -62,7 +62,7 @@ autocmd('FileType', {
   end
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
+autocmd("BufWritePre", {
   pattern = "*.go",
   callback = function()
    require('go.format').goimport()
@@ -162,14 +162,14 @@ autocmd('FileType', {
   end
 })
 
-autocmd('BufRead,BufNewFile', {
+autocmd({'BufRead', 'BufNewFile'}, {
   pattern = 'jquery.*.js',
-  callback = function(args)
+  callback = function(args) --]]
     v_call [[ set ft=javascript syntax=jquery ]]
   end
 })
 
-autocmd('BufRead,BufNewFile,FileType', {
+autocmd({'BufRead', 'BufNewFile', 'FileType'}, {
   pattern = '*.json,json',
   callback = function(args)
     global.filetype = 'json'
@@ -177,7 +177,7 @@ autocmd('BufRead,BufNewFile,FileType', {
   end
 })
 
-autocmd('BufRead,BufNewFile', {
+autocmd({'BufRead', 'BufNewFile'}, {
   pattern = '.eslintrc,.babelrc',
   callback = function(args)
     global.filetype = 'json'
@@ -185,7 +185,7 @@ autocmd('BufRead,BufNewFile', {
 })
 
 if vim.fn.exists('g:taggedtemplate#tagSyntaxMap') == 1 then
-  autocmd('FileType,BufNewFile,BufRead', {
+  autocmd({'FileType', 'BufNewFile', 'BufRead'}, {
     pattern = 'javascript,typescript,jsx',
     callback = function(args)
       v_cmd [[ call taggedtemplate#applySyntaxMap() ]]
@@ -203,7 +203,7 @@ autocmd('FileType', {
   end
 })
 
-autocmd('FileType,BufRead,BufNewFile', {
+autocmd({'FileType', 'BufRead', 'BufNewFile'}, {
   pattern = '*.scss,scss',
   callback = function(args)
     global.filetype = 'scss.css'
@@ -214,7 +214,7 @@ autocmd('FileType,BufRead,BufNewFile', {
   end
 })
 
-autocmd('FileType,BufNewFile,BufRead', {
+autocmd({'FileType', 'BufNewFile', 'BufRead'}, {
   pattern = 'less,*.less',
   callback = function(args)
     global.filetype = 'less'
@@ -222,12 +222,6 @@ autocmd('FileType,BufNewFile,BufRead', {
     buffer.softtabstop = 2
     buffer.shiftwidth = 2
     buffer.expandtab = true
-  end
-})
-
-autocmd('FileType', {
-  pattern = '',
-  callback = function(args)
   end
 })
 
@@ -272,7 +266,7 @@ autocmd('FileType', {
   end
 })
 
-autocmd('FileType,BufNewFile,BufReadPost', {
+autocmd({'FileType', 'BufNewFile', 'BufReadPost'}, {
   pattern = 'yaml,*yaml,*yml',
   callback = function(args)
     global.filetype = 'yaml'
@@ -282,4 +276,3 @@ autocmd('FileType,BufNewFile,BufReadPost', {
     buffer.expandtab = true
   end
 })
-
