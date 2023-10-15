@@ -33,7 +33,6 @@ tree.setup{
     timeout = 400,
   },
   view = {
-    hide_root_folder = false,
     side = "left",
     number = false,
     relativenumber = false,

@@ -2,7 +2,6 @@
 -- Basic configuration
 --------------------------------------------------
 require 'base.plugins'
-require 'impatient'
 
 require 'base.options'
 require 'base.commands'
@@ -31,3 +30,4 @@ require 'plugins.comment'
 require 'plugins.whichkey'
 require 'plugins.todo-comments'
 require 'plugins.luasnip'
+require 'plugins.guihua'
