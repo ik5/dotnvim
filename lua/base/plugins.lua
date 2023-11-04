@@ -5,7 +5,7 @@ require "paq" {
   { 'nvim-lua/plenary.nvim' },
 
   -- Syntax handling
-  { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
+  { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
   { 'nvim-treesitter/nvim-treesitter-context' },
   { 'nvim-treesitter/nvim-treesitter-refactor' },
   { 'nvim-treesitter/nvim-treesitter-textobjects' },
@@ -44,7 +44,7 @@ require "paq" {
   { 'simrat39/symbols-outline.nvim', },
   { "caenrique/swap-buffers.nvim", },
   { "SmiteshP/nvim-navic" },
-  { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
+  { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' },
 
   -- VCS
   {'sindrets/diffview.nvim'},
@@ -71,7 +71,7 @@ require "paq" {
   {'saadparwaiz1/cmp_luasnip'},
   {"rcarriga/cmp-dap"},
     -- snippets
-  { 'L3MON4D3/LuaSnip', run = 'make install_jsregexp' },
+  { 'L3MON4D3/LuaSnip', build = 'make install_jsregexp' },
   { 'rafamadriz/friendly-snippets' },
   {'hrsh7th/nvim-cmp'},
   {'saadparwaiz1/cmp_luasnip' },
