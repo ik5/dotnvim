@@ -12,7 +12,6 @@ require 'base.colorscheme'
 ------------------------------------------------
 -- Plugins configuration
 ------------------------------------------------
-
 require 'plugins.treesitter'
 require 'plugins.bqf'
 require 'plugins.lsp'

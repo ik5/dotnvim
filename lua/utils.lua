@@ -87,4 +87,10 @@ function utils.is_file_exists(name)
   return false
 end
 
+--- @param ... string
+--- @return string
+function utils.join_paths(...)
+  return (table.concat({ ... }, '/'):gsub('//+', '/'))
+end
+
 return utils

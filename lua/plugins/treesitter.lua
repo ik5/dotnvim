@@ -1,3 +1,4 @@
+require 'nvim-treesitter'
 local treesitter = require 'nvim-treesitter.configs'
 local treesitter_context = require 'treesitter-context'
 local hlargs = require 'hlargs'
@@ -19,6 +20,7 @@ treesitter.setup {
   indent = {
     enable = true,
   },
+  --[[
   refactor = {
     highlight_definitions = {
       enable = true,
@@ -45,6 +47,7 @@ treesitter.setup {
       },
     },
   },
+  --]]
   textobjects = {
     select = {
       enable = true,
