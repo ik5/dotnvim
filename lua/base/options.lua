@@ -155,9 +155,11 @@ global.tags= home .. '/tmp/tags,tags'     -- Set tags directory
 if (vim.fn.has('clipboard') == 1) then
   local clipboard = 'unnamed' -- use the '*' clipboard register
 
+  --[[
   if (vim.fn.has('unnamedplus') == 1) then
     clipboard = clipboard .. ',unnamedplus' -- use the '+' register
   end
+  --]]
 
   global.clipboard = clipboard
 end
