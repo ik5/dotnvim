@@ -27,19 +27,19 @@ pckr.add{
 
     -- Syntax handling
     { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' };
-    { 'nvim-treesitter/nvim-treesitter-context' };
-    { 'nvim-treesitter/nvim-treesitter-refactor' };
-    { 'nvim-treesitter/nvim-treesitter-textobjects' };
-    { 'windwp/nvim-ts-autotag' };
-    { 'windwp/nvim-autopairs' };
-    { 'm-demare/hlargs.nvim' };
+    { 'nvim-treesitter/nvim-treesitter-context', requires={ 'nvim-treesitter/nvim-treesitter'} };
+    { 'nvim-treesitter/nvim-treesitter-refactor', requires={ 'nvim-treesitter/nvim-treesitter'} };
+    { 'nvim-treesitter/nvim-treesitter-textobjects', requires={ 'nvim-treesitter/nvim-treesitter'} };
+    { 'windwp/nvim-ts-autotag', requires={ 'nvim-treesitter/nvim-treesitter'} };
+    { 'windwp/nvim-autopairs', requires={ 'nvim-treesitter/nvim-treesitter'} };
+    { 'm-demare/hlargs.nvim', requires={ 'nvim-treesitter/nvim-treesitter'} };
     {'mhartington/formatter.nvim'};
     { "folke/todo-comments.nvim" };
 
     -- LSP
     { 'neovim/nvim-lspconfig'};
     {'williamboman/mason.nvim'};
-    {"williamboman/mason-lspconfig.nvim"};
+    {"williamboman/mason-lspconfig.nvim", requiers= {{'williamboman/mason.nvim'}, { 'neovim/nvim-lspconfig'}} };
     {'ray-x/lsp_signature.nvim'};
     {'onsails/lspkind.nvim'};
 
