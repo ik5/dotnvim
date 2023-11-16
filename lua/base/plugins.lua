@@ -70,7 +70,7 @@ pckr.add{
     -- VCS
     {'sindrets/diffview.nvim'};
     { 'NeogitOrg/neogit', };
-    { 'lewis6991/gitsigns.nvim', requires={'nvim-lua/plenary.nvim"'}};
+    { 'lewis6991/gitsigns.nvim', requires={'nvim-lua/plenary.nvim'}};
 
     -- Edit
     { 'tpope/vim-surround'};
@@ -79,21 +79,21 @@ pckr.add{
 
     -- Auto complete
     { 'hrsh7th/nvim-cmp' };
-    {'hrsh7th/cmp-path'};
-    {'hrsh7th/cmp-nvim-lua'};
-    {'hrsh7th/cmp-omni'};
-    {'hrsh7th/cmp-buffer'};
-    {'hrsh7th/cmp-nvim-lsp'};
-    {'hrsh7th/cmp-cmdline'};
-    {'f3fora/cmp-spell'};
-    {'andersevenrud/cmp-tmux'};
-    {'ray-x/cmp-treesitter'};
-    {'octaltree/cmp-look'};
-    {'saadparwaiz1/cmp_luasnip'};
-    {"rcarriga/cmp-dap"};
+    {'hrsh7th/cmp-path', requiers={ 'hrsh7th/nvim-cmp' }};
+    {'hrsh7th/cmp-nvim-lua', requiers={ 'hrsh7th/nvim-cmp' }};
+    {'hrsh7th/cmp-omni', requiers={ 'hrsh7th/nvim-cmp' }};
+    {'hrsh7th/cmp-buffer', requiers={ 'hrsh7th/nvim-cmp' }};
+    {'hrsh7th/cmp-nvim-lsp', requiers={{ 'hrsh7th/nvim-cmp' }, { 'neovim/nvim-lspconfig'}}};
+    {'hrsh7th/cmp-cmdline', requiers={ 'hrsh7th/nvim-cmp' }};
+    {'f3fora/cmp-spell', requiers={ 'hrsh7th/nvim-cmp' }};
+    {'andersevenrud/cmp-tmux', requiers={ 'hrsh7th/nvim-cmp' }};
+    {'ray-x/cmp-treesitter', requiers={{ 'hrsh7th/nvim-cmp' }, { 'nvim-treesitter/nvim-treesitter'}}};
+    {'octaltree/cmp-look', requiers={ 'hrsh7th/nvim-cmp' }};
+    {'saadparwaiz1/cmp_luasnip', requiers={{ 'hrsh7th/nvim-cmp' }, { 'L3MON4D3/LuaSnip'} }};
+    {"rcarriga/cmp-dap", requiers={ 'hrsh7th/nvim-cmp' }};
     -- snippets
     { 'L3MON4D3/LuaSnip', run = 'make install_jsregexp' };
-    { 'rafamadriz/friendly-snippets' };
+    { 'rafamadriz/friendly-snippets', requires={ 'L3MON4D3/LuaSnip'} };
 
     -- Programming languages
     -- Golang
