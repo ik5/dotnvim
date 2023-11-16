@@ -38,10 +38,10 @@ pckr.add{
 
     -- LSP
     { 'neovim/nvim-lspconfig'};
-    {'williamboman/mason.nvim'};
+    {'williamboman/mason.nvim', requires={'williamboman/mason.nvim'}};
     {"williamboman/mason-lspconfig.nvim", requiers= {{'williamboman/mason.nvim'}, { 'neovim/nvim-lspconfig'}} };
-    {'ray-x/lsp_signature.nvim'};
-    {'onsails/lspkind.nvim'};
+    {'ray-x/lsp_signature.nvim', requires={'williamboman/mason.nvim'}};
+    {'onsails/lspkind.nvim', requires={'williamboman/mason.nvim'}};
 
     -- look and feel
     { "tanvirtin/monokai.nvim" };
@@ -64,13 +64,13 @@ pckr.add{
     { 'akinsho/bufferline.nvim' };
     { 'simrat39/symbols-outline.nvim', };
     { "caenrique/swap-buffers.nvim", };
-    { "SmiteshP/nvim-navic" };
+    { "SmiteshP/nvim-navic", requires={'neovim/nvim-lspconfig'}};
     { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' };
 
     -- VCS
     {'sindrets/diffview.nvim'};
     { 'NeogitOrg/neogit', };
-    { 'lewis6991/gitsigns.nvim', };
+    { 'lewis6991/gitsigns.nvim', requires={'nvim-lua/plenary.nvim"'}};
 
     -- Edit
     { 'tpope/vim-surround'};
