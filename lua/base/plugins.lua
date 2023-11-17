@@ -27,12 +27,13 @@ pckr.add{
 
     -- Syntax handling
     { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' };
-    { 'nvim-treesitter/nvim-treesitter-context', requires={ 'nvim-treesitter/nvim-treesitter'} };
-    { 'nvim-treesitter/nvim-treesitter-refactor', requires={ 'nvim-treesitter/nvim-treesitter'} };
-    { 'nvim-treesitter/nvim-treesitter-textobjects', requires={ 'nvim-treesitter/nvim-treesitter'} };
-    { 'windwp/nvim-ts-autotag', requires={ 'nvim-treesitter/nvim-treesitter'} };
-    { 'windwp/nvim-autopairs', requires={ 'nvim-treesitter/nvim-treesitter'} };
-    { 'm-demare/hlargs.nvim', requires={ 'nvim-treesitter/nvim-treesitter'} };
+      { 'nvim-treesitter/nvim-treesitter-context', requires={ 'nvim-treesitter/nvim-treesitter' } };
+      { 'nvim-treesitter/nvim-treesitter-refactor', requires={ 'nvim-treesitter/nvim-treesitter' } };
+      { 'nvim-treesitter/nvim-treesitter-textobjects', requires={ 'nvim-treesitter/nvim-treesitter' } };
+      { 'windwp/nvim-ts-autotag', requires={ 'nvim-treesitter/nvim-treesitter' } };
+      { 'windwp/nvim-autopairs', requires={ 'nvim-treesitter/nvim-treesitter' } };
+      { 'm-demare/hlargs.nvim', requires={ 'nvim-treesitter/nvim-treesitter' } };
+
     {'mhartington/formatter.nvim'};
     { "folke/todo-comments.nvim" };
 
@@ -40,8 +41,8 @@ pckr.add{
     { 'neovim/nvim-lspconfig'};
     {'williamboman/mason.nvim', requires={'williamboman/mason.nvim'}};
     {"williamboman/mason-lspconfig.nvim", requiers= {{'williamboman/mason.nvim'}, { 'neovim/nvim-lspconfig'}} };
-    {'ray-x/lsp_signature.nvim', requires={'williamboman/mason.nvim'}};
-    {'onsails/lspkind.nvim', requires={'williamboman/mason.nvim'}};
+    {'ray-x/lsp_signature.nvim', requires={{'williamboman/mason.nvim'}, { 'neovim/nvim-lspconfig'}}};
+    {'onsails/lspkind.nvim', requires={{'williamboman/mason.nvim'}, { 'neovim/nvim-lspconfig'}}};
 
     -- look and feel
     { "tanvirtin/monokai.nvim" };
@@ -54,9 +55,9 @@ pckr.add{
 
     -- Search and Replace
     { 'nvim-telescope/telescope.nvim' };
-    {'nvim-telescope/telescope-symbols.nvim'};
-    {'cljoly/telescope-repo.nvim'},  -- support for VCS repo
-    {'gbrlsnchs/telescope-lsp-handlers.nvim'};
+    {'nvim-telescope/telescope-symbols.nvim', requires={'nvim-telescope/telescope.nvim'}};
+    {'cljoly/telescope-repo.nvim', requires={ 'nvim-telescope/telescope.nvim' }};  -- support for VCS repo
+    {'gbrlsnchs/telescope-lsp-handlers.nvim', requires={{ 'neovim/nvim-lspconfig'}, { 'nvim-telescope/telescope.nvim' }}};
     {'kevinhwang91/nvim-bqf'};
 
     -- UI
@@ -108,10 +109,10 @@ pckr.add{
     };
 
     -- Debugging
-    { 'mfussenegger/nvim-dap', };
-    { "rcarriga/nvim-dap-ui", };
-    { 'theHamsta/nvim-dap-virtual-text', };
-    { 'jay-babu/mason-nvim-dap.nvim', };
+    { 'mfussenegger/nvim-dap', requires={ 'neovim/nvim-lspconfig'}};
+    { "rcarriga/nvim-dap-ui", requires={ 'mfussenegger/nvim-dap'}};
+    { 'theHamsta/nvim-dap-virtual-text', requires={ 'mfussenegger/nvim-dap'}};
+    { 'jay-babu/mason-nvim-dap.nvim', requires={ 'mfussenegger/nvim-dap'}};
 };
 
 --[[
