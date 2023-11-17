@@ -1,16 +1,9 @@
 local go_nvim = require 'go'
 local cfg = vim.g
-local capabilities = require('cmp_nvim_lsp').default_capabilities(
-  vim.lsp.protocol.make_client_capabilities()
-)
-
 go_nvim.setup {
   goimport = 'gopls', -- if set to 'gopls' will use golsp format
   gofmt = 'gopls', -- if set to gopls will use golsp format
   fillstruct = "gopls",
-  lsp_cfg = {
-    capabilities = capabilities,
-  },
   luasnip = true, -- set false to disable
   icons = { breakpoint = "🧘", currentpos = "🏃" }, -- set to false to disable this option
   trouble = true, -- true: use trouble to open quickfix

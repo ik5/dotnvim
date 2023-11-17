@@ -66,7 +66,6 @@ pckr.add{
     { 'simrat39/symbols-outline.nvim', };
     { "caenrique/swap-buffers.nvim", };
     { "SmiteshP/nvim-navic", requires={'neovim/nvim-lspconfig'}};
-    { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' };
 
     -- VCS
     {'sindrets/diffview.nvim'};
@@ -98,7 +97,14 @@ pckr.add{
 
     -- Programming languages
     -- Golang
-    {'ray-x/go.nvim'};
+    {
+      'ray-x/go.nvim',
+      requires={
+        {'neovim/nvim-lspconfig'},
+        {'nvim-treesitter/nvim-treesitter'},
+        { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' }, -- ui
+      }
+    };
 
     -- rust
     { 'simrat39/rust-tools.nvim' };

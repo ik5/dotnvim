@@ -10,6 +10,8 @@ local formatter = require("formatter")
 local navic = require("nvim-navic")
 local utils = require('utils')
 
+local install_root_dir = vim.fn.stdpath("data") .. "/mason"
+
 local on_attach = function(client, bufnr)
   signature.on_attach({
     bind = true, -- This is mandatory, otherwise border config won't get registered.
@@ -124,6 +126,13 @@ if not configs.golangcilsp then
 end
 nvim_lsp.golangci_lint_ls.setup {
 	filetypes = {'go','gomod'}
+}
+
+nvim_lsp.gopls.setup {
+  gopls_cmd = {install_root_dir .. '/go/gopls'},
+  fillstruct = 'gopls',
+  dap_debug = true,
+  dap_debug_gui = true
 }
 
 mason_lspconfig.setup({
