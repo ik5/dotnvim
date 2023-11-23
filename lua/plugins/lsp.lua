@@ -106,7 +106,7 @@ mason.setup({
 
 lsp_servers = {
   'clangd', 'lemminx', 'gopls', 'html', 'jsonls', 'rust_analyzer', 'yamlls',
-  'taplo', 'pyright', 'denols', 'biome', 'templ',
+  'taplo', 'pyright', 'denols', 'biome', 'templ', 'arduino_language_server',
 }
 
 if utils.is_file_exists('/usr/bin/php') then
@@ -133,6 +133,11 @@ nvim_lsp.gopls.setup {
   fillstruct = 'gopls',
   dap_debug = true,
   dap_debug_gui = true
+}
+
+nvim_lsp.clangd.setup{
+  cmd = { "clangd", "--background-index" },
+  filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", },
 }
 
 mason_lspconfig.setup({
