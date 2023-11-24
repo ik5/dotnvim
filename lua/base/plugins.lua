@@ -114,6 +114,11 @@ pckr.add{
       'akinsho/flutter-tools.nvim'
     };
 
+  -- clang
+  {
+    'p00f/clangd_extensions.nvim'
+  };
+
     -- Debugging
     { 'mfussenegger/nvim-dap', requires={ 'neovim/nvim-lspconfig'}};
     { "rcarriga/nvim-dap-ui", requires={ 'mfussenegger/nvim-dap'}};
