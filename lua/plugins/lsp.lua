@@ -136,7 +136,7 @@ nvim_lsp.gopls.setup {
   dap_debug_gui = true
 }
 
-let home = utils.home()
+local home = utils.home()
 
 nvim_lsp.clangd.setup{
   cmd = {
