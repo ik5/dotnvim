@@ -136,8 +136,49 @@ nvim_lsp.gopls.setup {
   dap_debug_gui = true
 }
 
+let home = utils.home()
+
 nvim_lsp.clangd.setup{
-  cmd = { "clangd", "--background-index" },
+  cmd = {
+    "clangd", "--background-index",
+    "–query-driver=" ..
+    home .. "/.arduino15/packages/arduino/tools/openocd/0.11.0-arduino2/bin," ..
+    home .. "/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin," ..
+    home .. "/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/arm-none-eabi/bin," ..
+    home .. "/.arduino15/packages/arduino/hardware/esp32/2.0.13/tools/sdk/esp32s3/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/xtensa-esp32s3-elf-gcc/esp-2021r2-patch5-8.4.0/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/xtensa-esp32s3-elf-gcc/esp-2021r2-patch5-8.4.0/xtensa-esp32s3-elf/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/openocd-esp32/v0.11.0-esp32-20221026/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/riscv32-esp-elf-gcc/esp-2021r2-patch5-8.4.0/riscv32-esp-elf/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/riscv32-esp-elf-gcc/esp-2021r2-patch5-8.4.0/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/riscv32-esp-elf-gdb/11.2_20220823/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/xtensa-esp32-elf-gcc/esp-2021r2-patch5-8.4.0/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/xtensa-esp32-elf-gcc/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/xtensa-esp32s2-elf-gcc/esp-2021r2-patch5-8.4.0/xtensa-esp32s2-elf/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/xtensa-esp32s2-elf-gcc/esp-2021r2-patch5-8.4.0/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/xtensa-esp-elf-gdb/11.2_20220823/bin," ..
+    home .. "/.arduino15/packages/esp32/hardware/esp32/2.0.11/tools/sdk/esp32c3/bin," ..
+    home .. "/.arduino15/packages/esp32/hardware/esp32/2.0.11/tools/sdk/esp32s3/bin," ..
+    home .. "/.arduino15/packages/esp32/hardware/esp32/2.0.11/tools/sdk/esp32/bin," ..
+    home .. "/.arduino15/packages/esp32/hardware/esp32/2.0.11/tools/sdk/esp32s2/bin," ..
+    home .. "/.arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/3.1.0-gcc10.3-e5f9fec/xtensa-lx106-elf/bin," ..
+    home .. "/.arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/3.1.0-gcc10.3-e5f9fec/bin," ..
+    home .. "/.arduino15/packages/esp8266/hardware/esp8266/3.1.2/tools/sdk/uzlib/bin," ..
+    home .. "/.espressif/tools/xtensa-esp32s2-elf/esp-12.2.0_20230208/xtensa-esp32s2-elf/xtensa-esp32s2-elf/bin," ..
+    home .. "/.espressif/tools/xtensa-esp32s2-elf/esp-12.2.0_20230208/xtensa-esp32s2-elf/bin," ..
+    home .. "/.espressif/tools/openocd-esp32/v0.12.0-esp32-20230921/openocd-esp32/bin," ..
+    home .. "/.espressif/tools/esp32ulp-elf/2.35_20220830/esp32ulp-elf/esp32ulp-elf/bin," ..
+    home .. "/.espressif/tools/esp32ulp-elf/2.35_20220830/esp32ulp-elf/bin," ..
+    home .. "/.espressif/tools/riscv32-esp-elf/esp-12.2.0_20230208/riscv32-esp-elf/riscv32-esp-elf/bin," ..
+    home .. "/.espressif/tools/riscv32-esp-elf/esp-12.2.0_20230208/riscv32-esp-elf/bin," ..
+    home .. "/.espressif/tools/riscv32-esp-elf-gdb/12.1_20221002/riscv32-esp-elf-gdb/bin," ..
+    home .. "/.espressif/tools/xtensa-esp32-elf/esp-12.2.0_20230208/xtensa-esp32-elf/bin," ..
+    home .. "/.espressif/tools/xtensa-esp32-elf/esp-12.2.0_20230208/xtensa-esp32-elf/xtensa-esp32-elf/bin," ..
+    home .. "/.espressif/tools/xtensa-esp32s3-elf/esp-12.2.0_20230208/xtensa-esp32s3-elf/bin," ..
+    home .. "/.espressif/tools/xtensa-esp32s3-elf/esp-12.2.0_20230208/xtensa-esp32s3-elf/xtensa-esp32s3-elf/bin," ..
+    home .. "/.espressif/tools/xtensa-esp-elf-gdb/12.1_20221002/xtensa-esp-elf-gdb/bin,"
+
+  },
   filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", },
 }
 
