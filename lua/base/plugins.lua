@@ -95,6 +95,8 @@ pckr.add{
     { 'L3MON4D3/LuaSnip', run = 'make install_jsregexp' };
     { 'rafamadriz/friendly-snippets', requires={ 'L3MON4D3/LuaSnip'} };
 
+    { "nvim-neotest/nvim-nio" };
+
     -- Programming languages
     -- Golang
     {
