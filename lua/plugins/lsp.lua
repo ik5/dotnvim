@@ -176,7 +176,8 @@ nvim_lsp.clangd.setup{
     home .. "/.espressif/tools/xtensa-esp32-elf/esp-12.2.0_20230208/xtensa-esp32-elf/xtensa-esp32-elf/bin," ..
     home .. "/.espressif/tools/xtensa-esp32s3-elf/esp-12.2.0_20230208/xtensa-esp32s3-elf/bin," ..
     home .. "/.espressif/tools/xtensa-esp32s3-elf/esp-12.2.0_20230208/xtensa-esp32s3-elf/xtensa-esp32s3-elf/bin," ..
-    home .. "/.espressif/tools/xtensa-esp-elf-gdb/12.1_20221002/xtensa-esp-elf-gdb/bin,"
+    home .. "/.espressif/tools/xtensa-esp-elf-gdb/12.1_20221002/xtensa-esp-elf-gdb/bin," ..
+    "/opt/esp-idf/components,"
 
   },
   filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", },
