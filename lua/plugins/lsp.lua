@@ -107,7 +107,7 @@ mason.setup({
 lsp_servers = {
   'clangd', 'lemminx', 'gopls', 'html', 'jsonls', 'rust_analyzer', 'yamlls',
   'taplo', 'pyright', 'denols', 'biome', 'templ', 'arduino_language_server',
-  'htmx'
+  'htmx', 'htmlhint', 'lwc_ls'
 }
 
 if utils.is_file_exists('/usr/bin/php') then
@@ -133,7 +133,30 @@ nvim_lsp.gopls.setup {
   gopls_cmd = {install_root_dir .. '/go/gopls'},
   fillstruct = 'gopls',
   dap_debug = true,
-  dap_debug_gui = true
+  dap_debug_gui = true,
+  usePlaceholders = true,
+  codelenses = {
+    generate = true,
+    gc_details = true,
+    regenerate_cgo = true,
+    run_govulncheck = true,
+    tidy = true,
+  },
+  analyses = {
+    useany = true,
+    unusedvariable = true,
+    unusedresult = true,
+    unusedparams = true,
+    unsafeptr = true,
+    unreachable = true,
+    unmarshal = true,
+    undeclaredname = true,
+    shadow = true,
+  },
+  hints = {
+    assignVariableTypes = true,
+    compositeLiteralFields = true,
+  },
 }
 
 local home = utils.home()
