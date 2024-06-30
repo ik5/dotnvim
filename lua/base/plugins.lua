@@ -27,12 +27,12 @@ pckr.add{
 
     -- Syntax handling
     { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' };
-      { 'nvim-treesitter/nvim-treesitter-context', requires={ 'nvim-treesitter/nvim-treesitter' } };
-      { 'nvim-treesitter/nvim-treesitter-refactor', requires={ 'nvim-treesitter/nvim-treesitter' } };
-      { 'nvim-treesitter/nvim-treesitter-textobjects', requires={ 'nvim-treesitter/nvim-treesitter' } };
-      { 'windwp/nvim-ts-autotag', requires={ 'nvim-treesitter/nvim-treesitter' } };
-      { 'windwp/nvim-autopairs', requires={ 'nvim-treesitter/nvim-treesitter' } };
-      { 'm-demare/hlargs.nvim', requires={ 'nvim-treesitter/nvim-treesitter' } };
+      { 'nvim-treesitter/nvim-treesitter-context' };
+      { 'nvim-treesitter/nvim-treesitter-refactor' };
+      { 'nvim-treesitter/nvim-treesitter-textobjects', requires={ 'nvim-treesitter/nvim-treesitter' }};
+      { 'windwp/nvim-ts-autotag',  };
+      { 'windwp/nvim-autopairs',  };
+      { 'm-demare/hlargs.nvim',  };
 
     {'mhartington/formatter.nvim'};
     { "folke/todo-comments.nvim" };
@@ -40,9 +40,9 @@ pckr.add{
     -- LSP
     { 'neovim/nvim-lspconfig'};
     {'williamboman/mason.nvim', requires={'williamboman/mason.nvim'}};
-    {"williamboman/mason-lspconfig.nvim", requiers= {{'williamboman/mason.nvim'}, { 'neovim/nvim-lspconfig'}} };
-    {'ray-x/lsp_signature.nvim', requires={{'williamboman/mason.nvim'}, { 'neovim/nvim-lspconfig'}}};
-    {'onsails/lspkind.nvim', requires={{'williamboman/mason.nvim'}, { 'neovim/nvim-lspconfig'}}};
+    {"williamboman/mason-lspconfig.nvim", requiers= {{ 'neovim/nvim-lspconfig'}} };
+    {'ray-x/lsp_signature.nvim', };
+    {'onsails/lspkind.nvim', };
 
     -- look and feel
     { "tanvirtin/monokai.nvim" };
@@ -56,8 +56,8 @@ pckr.add{
     -- Search and Replace
     { 'nvim-telescope/telescope.nvim' };
     {'nvim-telescope/telescope-symbols.nvim', requires={'nvim-telescope/telescope.nvim'}};
-    {'cljoly/telescope-repo.nvim', requires={ 'nvim-telescope/telescope.nvim' }};  -- support for VCS repo
-    {'gbrlsnchs/telescope-lsp-handlers.nvim', requires={{ 'neovim/nvim-lspconfig'}, { 'nvim-telescope/telescope.nvim' }}};
+    {'cljoly/telescope-repo.nvim', };  -- support for VCS repo
+    {'gbrlsnchs/telescope-lsp-handlers.nvim', };
     {'kevinhwang91/nvim-bqf'};
 
     -- UI
@@ -65,7 +65,7 @@ pckr.add{
     { 'akinsho/bufferline.nvim' };
     { 'simrat39/symbols-outline.nvim', };
     { "caenrique/swap-buffers.nvim", };
-    { "SmiteshP/nvim-navic", requires={'neovim/nvim-lspconfig'}};
+    { "SmiteshP/nvim-navic", };
 
     -- VCS
     {'sindrets/diffview.nvim'};
@@ -102,8 +102,6 @@ pckr.add{
     {
       'ray-x/go.nvim',
       requires={
-        {'neovim/nvim-lspconfig'},
-        {'nvim-treesitter/nvim-treesitter'},
         { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' }, -- ui
       }
     };
