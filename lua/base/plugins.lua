@@ -27,12 +27,12 @@ pckr.add{
 
     -- Syntax handling
     { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' };
-      { 'nvim-treesitter/nvim-treesitter-context' };
-      { 'nvim-treesitter/nvim-treesitter-refactor' };
-      { 'nvim-treesitter/nvim-treesitter-textobjects', requires={ 'nvim-treesitter/nvim-treesitter' }};
-      { 'windwp/nvim-ts-autotag',  };
-      { 'windwp/nvim-autopairs',  };
-      { 'm-demare/hlargs.nvim',  };
+    { 'nvim-treesitter/nvim-treesitter-textobjects', requires={ 'nvim-treesitter/nvim-treesitter' }};
+    { 'nvim-treesitter/nvim-treesitter-context' };
+    { 'nvim-treesitter/nvim-treesitter-refactor' };
+    { 'windwp/nvim-ts-autotag',  };
+    { 'windwp/nvim-autopairs',  };
+    { 'm-demare/hlargs.nvim',  };
 
     {'mhartington/formatter.nvim'};
     { "folke/todo-comments.nvim" };
@@ -100,24 +100,17 @@ pckr.add{
     -- Programming languages
     -- Golang
     {
-      'ray-x/go.nvim',
-      requires={
-        { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' }, -- ui
-      }
+      'ray-x/go.nvim', requires={ { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' } },
     };
 
     -- rust
     { 'simrat39/rust-tools.nvim' };
 
     -- flutter
-    {
-      'akinsho/flutter-tools.nvim'
-    };
+    { 'akinsho/flutter-tools.nvim' };
 
   -- clang
-  {
-    'p00f/clangd_extensions.nvim'
-  };
+  { 'p00f/clangd_extensions.nvim' };
 
     -- Debugging
     { 'mfussenegger/nvim-dap', requires={ 'neovim/nvim-lspconfig'}};
