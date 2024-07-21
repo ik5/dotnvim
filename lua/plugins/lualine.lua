@@ -11,6 +11,8 @@ local lualine = require('lualine')
 local bufferline = require('bufferline')
 local navic = require("nvim-navic")
 
+vim.diagnostic.config { update_in_insert = true }
+
 lualine.setup{
   options = {
     icons_enabled = true,
@@ -76,7 +78,6 @@ lualine.setup{
         },
         symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
         colored = true,           -- Displays diagnostics status in color if set to true.
-        update_in_insert = false, -- Update diagnostics in insert mode.
         always_visible = false,   -- Show diagnostics even if there are none.
       },
       {
@@ -143,7 +144,7 @@ bufferline.setup {
     always_show_bufferline = true,
     toggle_hidden_on_enter = true, -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
     diagnostics = 'nvim_lsp',
-    diagnostics_update_in_insert = true,
+    -- diagnostics_update_in_insert = true,
     diagnostics_indicator = function(count, level, diagnostics_dict, context)
       return "("..count..")"
     end,
