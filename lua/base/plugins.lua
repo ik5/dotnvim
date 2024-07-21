@@ -48,6 +48,7 @@ pckr.add{
     { "tanvirtin/monokai.nvim" };
     {'nvim-lualine/lualine.nvim'};
     {'nvim-tree/nvim-web-devicons'};
+    { 'echasnovski/mini.nvim' },
     {"lukas-reineke/indent-blankline.nvim"};
 
     -- navigation
