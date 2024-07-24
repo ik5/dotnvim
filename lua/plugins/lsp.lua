@@ -106,8 +106,8 @@ mason.setup({
 
 lsp_servers = {
   'clangd', 'lemminx', 'gopls', 'html', 'jsonls', 'rust_analyzer', 'yamlls',
-  'taplo', 'pyright', 'denols', 'biome', 'templ', 'arduino_language_server',
-  'htmx', 'lwc_ls'
+  'taplo', 'pyright', 'ruff', 'denols', 'biome', 'templ',
+  'arduino_language_server', 'htmx', 'lwc_ls'
 }
 
 if utils.is_file_exists('/usr/bin/php') then
@@ -206,6 +206,45 @@ nvim_lsp.clangd.setup{
   filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", },
 }
 
+nvim_lsp.ruff.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+
+  init_options = {
+    settings = {
+      configurationPreference = "filesystemFirst",
+      organizeImports = true,
+      showSyntaxErrors = true,
+      lint = {
+        enable = true,
+        preview = true,
+      },
+      codeAction = {
+        disableRuleComment = { enable = true },
+        fixViolation = { enable = true },
+      },
+      format = { preview = true },
+    },
+  },
+}
+
+nvim_lsp.pyright.setup {
+  settings = {
+    pyright = {
+      -- Using Ruff's import organizer
+      disableOrganizeImports = true,
+    },
+    python = {
+      analysis = {
+        -- Ignore all files for analysis to exclusively use Ruff for linting
+        ignore = { '*' },
+      },
+    },
+  },
+}
+
+
+
 mason_lspconfig.setup({
   ensure_installed = lsp_servers,
   automatic_installation = true,
@@ -246,7 +285,7 @@ require('rust-tools').setup({
   tools = {
     autoSetHints = true,
     inlay_hints = {
-      show_parameter_hints = true,
+show_parameter_hints = true,
       parameter_hints_prefix = "",
       other_hints_prefix = "",
     },
