@@ -99,6 +99,7 @@ treesitter.setup {
     },
 }
 
+--[[
 treesitter_context.setup {
   enable = true,          -- Enable this plugin (Can be enabled/disabled later via commands)
   max_lines = 5,          -- How many lines the window should span. Values <= 0 mean no limit.
@@ -106,6 +107,7 @@ treesitter_context.setup {
   line_numbers = true,
   trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
 }
+--]]
 
 hlargs.setup {
   paint_arg_declarations = true,
