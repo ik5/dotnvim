@@ -100,6 +100,14 @@ require("lazy").setup({
   { 'tpope/vim-surround'};
   {'junegunn/vim-easy-align'};
 
+  -- snippets
+  {
+    'L3MON4D3/LuaSnip',
+    version = "v2.*",
+  };
+  { 'rafamadriz/friendly-snippets', dependencies={ 'L3MON4D3/LuaSnip'} };
+
+
   -- Auto complete
   { 'hrsh7th/nvim-cmp' };
   {'hrsh7th/cmp-path', dependencies={ 'hrsh7th/nvim-cmp' }};
@@ -112,14 +120,9 @@ require("lazy").setup({
   {'andersevenrud/cmp-tmux', dependencies={ 'hrsh7th/nvim-cmp' }};
   {'ray-x/cmp-treesitter', dependencies={{ 'hrsh7th/nvim-cmp' }, { 'nvim-treesitter/nvim-treesitter'}}};
   {'octaltree/cmp-look', dependencies={ 'hrsh7th/nvim-cmp' }};
-  -- {'saadparwaiz1/cmp_luasnip', dependencies={{ 'hrsh7th/nvim-cmp' }, { 'L3MON4D3/LuaSnip'} }};
+  {'saadparwaiz1/cmp_luasnip', dependencies={{ 'hrsh7th/nvim-cmp' }, { 'L3MON4D3/LuaSnip'} }};
   {"rcarriga/cmp-dap", dependencies={ 'hrsh7th/nvim-cmp' }};
-  -- snippets
-  --[[ {
-    'L3MON4D3/LuaSnip',
-    version = "v2.*",
-  }; --]]
-  -- { 'rafamadriz/friendly-snippets', dependencies={ 'L3MON4D3/LuaSnip'} };
+
 
   { "nvim-neotest/nvim-nio" };
 
