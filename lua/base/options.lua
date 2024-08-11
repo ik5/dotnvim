@@ -1,7 +1,6 @@
 local utils = require('utils')
 local global = vim.o
 local window = vim.wo
-local buffer = vim.bo
 local v_cmd = vim.cmd
 local a_cmd = vim.api.nvim_command
 local autocmd = vim.api.nvim_create_autocmd
@@ -142,7 +141,7 @@ global.splitright = true -- Splits to the right
 -- Automatically equalize splits when Vim is resized
 autocmd('VimResized', {
   pattern = '*',
-  callback = function(args)
+  callback = function(_)
     v_cmd([[wincmd =]])
   end
 })
@@ -155,9 +154,11 @@ global.tags= home .. '/tmp/tags,tags'     -- Set tags directory
 if (vim.fn.has('clipboard') == 1) then
   local clipboard = 'unnamed' -- use the '*' clipboard register
 
+  --[[
   if (vim.fn.has('unnamedplus') == 1) then
     clipboard = clipboard .. ',unnamedplus' -- use the '+' register
   end
+  --]]
 
   global.clipboard = clipboard
 end
@@ -181,7 +182,7 @@ a_cmd('syntax on')
 a_cmd('syntax sync minlines=10')
 a_cmd('syntax sync maxlines=50')
 
-global.colorcolumn = 80
+global.colorcolumn = "80"
 window.colorcolumn = "80"
 
 global.timeout = false
@@ -233,7 +234,7 @@ global.sessionoptions = "blank,buffers,curdir,folds,help,options,resize,tabpages
 -- Auto reload files
 autocmd({'FocusGained', 'BufEnter'}, {
   pattern = '*',
-  callback = function(args) --]]
+  callback = function(_)
     v_cmd([[ checktime ]])
   end
 })
@@ -270,7 +271,7 @@ end
 
 autocmd('TermOpen', {
   pattern = '*',
-  callback = function(args)
+  callback = function(_)
     window.list = true
     window.wrap = true
   end

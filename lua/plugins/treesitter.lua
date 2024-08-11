@@ -1,3 +1,4 @@
+require 'nvim-treesitter'
 local treesitter = require 'nvim-treesitter.configs'
 local treesitter_context = require 'treesitter-context'
 local hlargs = require 'hlargs'
@@ -21,34 +22,23 @@ treesitter.setup {
   },
   refactor = {
     highlight_definitions = {
-      enable = true,
+      enable = false,
       -- Set to false if you have an `updatetime` of ~100.
       clear_on_cursor_move = true,
     },
     highlight_current_scope = {
-      enable = true,
+      enable = false,
     },
     smart_rename = {
       enable = true,
-      keymaps = {
-        smart_rename = "grr",
-      },
     },
     navigation = {
       enable = true,
-      keymaps = {
-        goto_definition = "gnd",
-        list_definitions = "gnD",
-        list_definitions_toc = "gO",
-        goto_next_usage = "<a-*>",
-        goto_previous_usage = "<a-#>",
-      },
     },
   },
   textobjects = {
     select = {
       enable = true,
-
       -- Automatically jump forward to textobj, similar to targets.vim
       lookahead = true,
 
@@ -97,11 +87,24 @@ treesitter.setup {
       },
     },
   },
+  incremental_selection = {
+      enable = true,
+      keymaps = {
+        -- mappings for incremental selection (visual mappings)
+        init_selection = "gnn", -- maps in normal mode to init the node/scope selection
+        node_incremental = "grn", -- increment to the upper named parent
+        scope_incremental = "grc", -- increment to the upper scope (as defined in locals.scm)
+        node_decremental = "grm" -- decrement to the previous node
+      }
+    },
 }
 
 treesitter_context.setup {
-  enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-  max_lines = 5, -- How many lines the window should span. Values <= 0 mean no limit.
+  enable = true,          -- Enable this plugin (Can be enabled/disabled later via commands)
+  max_lines = 5,          -- How many lines the window should span. Values <= 0 mean no limit.
+  ultiline_threshold = 5, -- Maximum number of lines to show for a single context
+  line_numbers = true,
+  trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
 }
 
 hlargs.setup {
@@ -126,6 +129,7 @@ require('nvim-autopairs').setup {
 }
 
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-local cmp = require('cmp')
-cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+require('cmp').event:on(
+  'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } })
+)
 

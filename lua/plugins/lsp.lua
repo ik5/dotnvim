@@ -4,11 +4,12 @@ local lsp_utils = require "lspconfig/util"
 local mason = require "mason"
 local mason_lspconfig = require 'mason-lspconfig'
 local signature = require 'lsp_signature'
-local lsp_kind = require 'lspkind'
 local capabilities = require('cmp_nvim_lsp').default_capabilities()  -- capabilities of cmp_lsp as part of any LSP
 local formatter = require("formatter")
 local navic = require("nvim-navic")
 local utils = require('utils')
+
+local install_root_dir = vim.fn.stdpath("data") .. "/mason"
 
 local on_attach = function(client, bufnr)
   signature.on_attach({
@@ -61,13 +62,13 @@ local on_attach = function(client, bufnr)
   vim.cmd [[ command! LspHelp :lua vim.lsp.buf.signature_help() ]]
 
   if client.server_capabilities.document_highlight then
-    vim.api.nvim_exec([[
+    vim.api.nvim_exec2([[
       augroup lsp_document_highlight
       autocmd! * <buffer>
       autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
       autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
       augroup END
-    ]], false)
+    ]], {false})
   end
 
 end
@@ -102,9 +103,10 @@ mason.setup({
   }
 })
 
-lsp_servers = {
+local lsp_servers = {
   'clangd', 'lemminx', 'gopls', 'html', 'jsonls', 'rust_analyzer', 'yamlls',
-  'taplo', 'pyright', 'denols', 'biome', 'templ',
+  'taplo', 'pyright', 'ruff', 'denols', 'biome', 'templ',
+  'arduino_language_server', 'htmx', 'lwc_ls', 'lua_ls', 'ast_grep',
 }
 
 if utils.is_file_exists('/usr/bin/php') then
@@ -124,6 +126,120 @@ if not configs.golangcilsp then
 end
 nvim_lsp.golangci_lint_ls.setup {
 	filetypes = {'go','gomod'}
+}
+
+nvim_lsp.gopls.setup {
+  gopls_cmd = {install_root_dir .. '/go/gopls'},
+  fillstruct = 'gopls',
+  dap_debug = true,
+  dap_debug_gui = true,
+  usePlaceholders = true,
+  codelenses = {
+    generate = true,
+    gc_details = true,
+    regenerate_cgo = true,
+    run_govulncheck = true,
+    tidy = true,
+  },
+  analyses = {
+    useany = true,
+    unusedvariable = true,
+    unusedresult = true,
+    unusedparams = true,
+    unsafeptr = true,
+    unreachable = true,
+    unmarshal = true,
+    undeclaredname = true,
+    shadow = true,
+  },
+  hints = {
+    assignVariableTypes = true,
+    compositeLiteralFields = true,
+  },
+}
+
+local home = utils.home()
+
+nvim_lsp.clangd.setup{
+  cmd = {
+    "clangd", "--background-index",
+    "–query-driver=" ..
+    home .. "/.arduino15/packages/arduino/tools/openocd/0.11.0-arduino2/bin," ..
+    home .. "/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin," ..
+    home .. "/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/arm-none-eabi/bin," ..
+    home .. "/.arduino15/packages/arduino/hardware/esp32/2.0.13/tools/sdk/esp32s3/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/xtensa-esp32s3-elf-gcc/esp-2021r2-patch5-8.4.0/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/xtensa-esp32s3-elf-gcc/esp-2021r2-patch5-8.4.0/xtensa-esp32s3-elf/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/openocd-esp32/v0.11.0-esp32-20221026/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/riscv32-esp-elf-gcc/esp-2021r2-patch5-8.4.0/riscv32-esp-elf/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/riscv32-esp-elf-gcc/esp-2021r2-patch5-8.4.0/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/riscv32-esp-elf-gdb/11.2_20220823/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/xtensa-esp32-elf-gcc/esp-2021r2-patch5-8.4.0/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/xtensa-esp32-elf-gcc/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/xtensa-esp32s2-elf-gcc/esp-2021r2-patch5-8.4.0/xtensa-esp32s2-elf/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/xtensa-esp32s2-elf-gcc/esp-2021r2-patch5-8.4.0/bin," ..
+    home .. "/.arduino15/packages/esp32/tools/xtensa-esp-elf-gdb/11.2_20220823/bin," ..
+    home .. "/.arduino15/packages/esp32/hardware/esp32/2.0.11/tools/sdk/esp32c3/bin," ..
+    home .. "/.arduino15/packages/esp32/hardware/esp32/2.0.11/tools/sdk/esp32s3/bin," ..
+    home .. "/.arduino15/packages/esp32/hardware/esp32/2.0.11/tools/sdk/esp32/bin," ..
+    home .. "/.arduino15/packages/esp32/hardware/esp32/2.0.11/tools/sdk/esp32s2/bin," ..
+    home .. "/.arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/3.1.0-gcc10.3-e5f9fec/xtensa-lx106-elf/bin," ..
+    home .. "/.arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/3.1.0-gcc10.3-e5f9fec/bin," ..
+    home .. "/.arduino15/packages/esp8266/hardware/esp8266/3.1.2/tools/sdk/uzlib/bin," ..
+    home .. "/.espressif/tools/xtensa-esp32s2-elf/esp-12.2.0_20230208/xtensa-esp32s2-elf/xtensa-esp32s2-elf/bin," ..
+    home .. "/.espressif/tools/xtensa-esp32s2-elf/esp-12.2.0_20230208/xtensa-esp32s2-elf/bin," ..
+    home .. "/.espressif/tools/openocd-esp32/v0.12.0-esp32-20230921/openocd-esp32/bin," ..
+    home .. "/.espressif/tools/esp32ulp-elf/2.35_20220830/esp32ulp-elf/esp32ulp-elf/bin," ..
+    home .. "/.espressif/tools/esp32ulp-elf/2.35_20220830/esp32ulp-elf/bin," ..
+    home .. "/.espressif/tools/riscv32-esp-elf/esp-12.2.0_20230208/riscv32-esp-elf/riscv32-esp-elf/bin," ..
+    home .. "/.espressif/tools/riscv32-esp-elf/esp-12.2.0_20230208/riscv32-esp-elf/bin," ..
+    home .. "/.espressif/tools/riscv32-esp-elf-gdb/12.1_20221002/riscv32-esp-elf-gdb/bin," ..
+    home .. "/.espressif/tools/xtensa-esp32-elf/esp-12.2.0_20230208/xtensa-esp32-elf/bin," ..
+    home .. "/.espressif/tools/xtensa-esp32-elf/esp-12.2.0_20230208/xtensa-esp32-elf/xtensa-esp32-elf/bin," ..
+    home .. "/.espressif/tools/xtensa-esp32s3-elf/esp-12.2.0_20230208/xtensa-esp32s3-elf/bin," ..
+    home .. "/.espressif/tools/xtensa-esp32s3-elf/esp-12.2.0_20230208/xtensa-esp32s3-elf/xtensa-esp32s3-elf/bin," ..
+    home .. "/.espressif/tools/xtensa-esp-elf-gdb/12.1_20221002/xtensa-esp-elf-gdb/bin," ..
+    "/opt/esp-idf/components,"
+
+  },
+  filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", },
+}
+
+nvim_lsp.ruff.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+
+  init_options = {
+    settings = {
+      configurationPreference = "filesystemFirst",
+      organizeImports = true,
+      showSyntaxErrors = true,
+      lint = {
+        enable = true,
+        preview = true,
+      },
+      codeAction = {
+        disableRuleComment = { enable = true },
+        fixViolation = { enable = true },
+      },
+      format = { preview = true },
+    },
+  },
+}
+
+nvim_lsp.pyright.setup {
+  settings = {
+    pyright = {
+      -- Using Ruff's import organizer
+      disableOrganizeImports = true,
+    },
+    python = {
+      analysis = {
+        -- Ignore all files for analysis to exclusively use Ruff for linting
+        ignore = { '*' },
+      },
+    },
+  },
 }
 
 mason_lspconfig.setup({
@@ -166,7 +282,7 @@ require('rust-tools').setup({
   tools = {
     autoSetHints = true,
     inlay_hints = {
-      show_parameter_hints = true,
+show_parameter_hints = true,
       parameter_hints_prefix = "",
       other_hints_prefix = "",
     },

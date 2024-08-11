@@ -12,7 +12,6 @@ require 'base.colorscheme'
 ------------------------------------------------
 -- Plugins configuration
 ------------------------------------------------
-
 require 'plugins.treesitter'
 require 'plugins.bqf'
 require 'plugins.lsp'
@@ -21,13 +20,11 @@ require 'plugins.telescope'
 require 'plugins.nvim-tree'
 require 'plugins.outline'
 require 'plugins.indent'
-require 'plugins.cmp'
+require 'plugins.cmp-settings'
 require 'plugins.swap_buffers'
 require 'plugins.git'
 require 'plugins.go'
-require 'plugins.dap'
-require 'plugins.comment'
+require 'plugins.dap-settings'
 require 'plugins.whichkey'
 require 'plugins.todo-comments'
-require 'plugins.luasnip'
 require 'plugins.guihua'

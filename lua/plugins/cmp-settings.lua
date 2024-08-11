@@ -33,7 +33,7 @@ local kind_icons = {
   Value = "",
   Enum = "",
   Keyword = "",
-  Snippet = "",
+  -- Snippet = "",
   Color = "",
   File = "",
   Reference = "",
@@ -48,10 +48,6 @@ local kind_icons = {
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup {
-  enabled = function()
-    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
-        or require("cmp_dap").is_dap_buffer()
-  end,
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body) -- For `luasnip` users.

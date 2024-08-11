@@ -5,11 +5,15 @@ vim.o.termguicolors = true
 
 if (vim.fn.has('termguicolors') == 1) then
   cmd('let $NVIM_TUI_ENABLE_TRUE_COLOR=1')
-
-  vim.o.t_8b = '^[[48;2;%lu;%lu;%lum'
-  vim.o.t_8f = '^[[38;2;%lu;%lu;%lum'
-  vim.o.t_Co = 256
   vim.o.termguicolors = true
+
+  -- vim.o.t_8b = '^[[48;2;%lu;%lu;%lum'
+  -- vim.o.t_8f = '^[[38;2;%lu;%lu;%lum'
+  -- vim.o.t_Co = 256
+  vim.cmd([[ set t_8b=^[[48;2;%lu;%lu;%lum ]])
+  vim.cmd([[ set t_8f=^[[38;2;%lu;%lu;%lum ]])
+  vim.cmd([[ set t_Co=256 ]])
+
   vim.g.t_8b = '^[[48;2;%lu;%lu;%lum'
   vim.g.t_8f = '^[[38;2;%lu;%lu;%lum'
   vim.g.t_Co = 256

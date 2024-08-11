@@ -19,7 +19,7 @@ function utils.isModuleAvailable(name)
     return true
   end
 
-  for _, searcher in ipairs(package.searchers or package.loaders) do
+  for _, searcher in ipairs(package.loaders) do
     local loader = searcher(name)
     if type(loader) == 'function' then
       package.preload[name] = loader
@@ -85,6 +85,12 @@ function utils.is_file_exists(name)
   end
 
   return false
+end
+
+--- @param ... string
+--- @return string
+function utils.join_paths(...)
+  return (table.concat({ ... }, '/'):gsub('//+', '/'))
 end
 
 return utils
