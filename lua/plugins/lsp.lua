@@ -107,7 +107,7 @@ mason.setup({
 lsp_servers = {
   'clangd', 'lemminx', 'gopls', 'html', 'jsonls', 'rust_analyzer', 'yamlls',
   'taplo', 'pyright', 'ruff', 'denols', 'biome', 'templ',
-  'arduino_language_server', 'htmx', 'lwc_ls'
+  'arduino_language_server', 'htmx', 'lwc_ls', 'lua_ls', 'ast_grep',
 }
 
 if utils.is_file_exists('/usr/bin/php') then
