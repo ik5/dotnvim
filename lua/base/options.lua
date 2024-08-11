@@ -1,7 +1,6 @@
 local utils = require('utils')
 local global = vim.o
 local window = vim.wo
-local buffer = vim.bo
 local v_cmd = vim.cmd
 local a_cmd = vim.api.nvim_command
 local autocmd = vim.api.nvim_create_autocmd
@@ -142,7 +141,7 @@ global.splitright = true -- Splits to the right
 -- Automatically equalize splits when Vim is resized
 autocmd('VimResized', {
   pattern = '*',
-  callback = function(args)
+  callback = function(_)
     v_cmd([[wincmd =]])
   end
 })
@@ -235,7 +234,7 @@ global.sessionoptions = "blank,buffers,curdir,folds,help,options,resize,tabpages
 -- Auto reload files
 autocmd({'FocusGained', 'BufEnter'}, {
   pattern = '*',
-  callback = function(args) --]]
+  callback = function(_)
     v_cmd([[ checktime ]])
   end
 })
@@ -272,7 +271,7 @@ end
 
 autocmd('TermOpen', {
   pattern = '*',
-  callback = function(args)
+  callback = function(_)
     window.list = true
     window.wrap = true
   end

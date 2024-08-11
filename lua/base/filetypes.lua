@@ -8,6 +8,8 @@ local window = vim.wo
 global.omnifunc = 'syntaxcomplete#Complete'
 buffer.omnifunc = 'syntaxcomplete#Complete'
 
+vim.g.loaded_perl_provider = 0
+
 autocmd('FileType', {
   pattern = 'javascript',
   callback = function(_)

@@ -1,4 +1,3 @@
-local map = vim.api.nvim_set_keymap
 local set = vim.keymap.set
 local tree = require('nvim-tree')
 

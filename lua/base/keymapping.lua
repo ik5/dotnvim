@@ -2,8 +2,6 @@ local utils = require('utils')
 local global = vim.g
 local map = vim.api.nvim_set_keymap
 local set = vim.keymap.set
-local autocmd = vim.api.nvim_create_autocmd
-local a_cmd = vim.api.nvim_command
 local v_cmd = vim.cmd
 
 local home = utils.home()

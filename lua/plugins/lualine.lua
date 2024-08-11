@@ -9,7 +9,6 @@ TODO:
 
 local lualine = require('lualine')
 local bufferline = require('bufferline')
-local navic = require("nvim-navic")
 
 vim.diagnostic.config { update_in_insert = true }
 
@@ -145,7 +144,7 @@ bufferline.setup {
     toggle_hidden_on_enter = true, -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
     diagnostics = 'nvim_lsp',
     -- diagnostics_update_in_insert = true,
-    diagnostics_indicator = function(count, level, diagnostics_dict, context)
+    diagnostics_indicator = function(count, _, _, _)
       return "("..count..")"
     end,
 
