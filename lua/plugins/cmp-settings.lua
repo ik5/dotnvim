@@ -5,14 +5,12 @@ if not cmp_status_ok then
   return
 end
 
---[[
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
   return
 end
---]]
 
--- require("luasnip/loaders/from_vscode").lazy_load()
+require("luasnip/loaders/from_vscode").lazy_load()
 
 local check_backspace = function()
   local col = fn.col "." - 1
@@ -50,17 +48,11 @@ local kind_icons = {
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup {
-  enabled = function()
-    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
-        or require("cmp_dap").is_dap_buffer()
-  end,
-    --[[
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body) -- For `luasnip` users.
     end
   },
-  --]]
   mapping = {
     ["<C-p>"] = cmp.mapping.select_prev_item(),
 		["<C-n>"] = cmp.mapping.select_next_item(),
