@@ -4,7 +4,6 @@ local lsp_utils = require "lspconfig/util"
 local mason = require "mason"
 local mason_lspconfig = require 'mason-lspconfig'
 local signature = require 'lsp_signature'
-local lsp_kind = require 'lspkind'
 local capabilities = require('cmp_nvim_lsp').default_capabilities()  -- capabilities of cmp_lsp as part of any LSP
 local formatter = require("formatter")
 local navic = require("nvim-navic")
@@ -63,13 +62,13 @@ local on_attach = function(client, bufnr)
   vim.cmd [[ command! LspHelp :lua vim.lsp.buf.signature_help() ]]
 
   if client.server_capabilities.document_highlight then
-    vim.api.nvim_exec([[
+    vim.api.nvim_exec2([[
       augroup lsp_document_highlight
       autocmd! * <buffer>
       autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
       autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
       augroup END
-    ]], false)
+    ]], {false})
   end
 
 end
@@ -104,7 +103,7 @@ mason.setup({
   }
 })
 
-lsp_servers = {
+local lsp_servers = {
   'clangd', 'lemminx', 'gopls', 'html', 'jsonls', 'rust_analyzer', 'yamlls',
   'taplo', 'pyright', 'ruff', 'denols', 'biome', 'templ',
   'arduino_language_server', 'htmx', 'lwc_ls', 'lua_ls', 'ast_grep',
@@ -242,8 +241,6 @@ nvim_lsp.pyright.setup {
     },
   },
 }
-
-
 
 mason_lspconfig.setup({
   ensure_installed = lsp_servers,
