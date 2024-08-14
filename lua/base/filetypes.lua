@@ -87,8 +87,10 @@ autocmd('FileType', {
         -- Instead of reverting the cursor to the last position in the buffer, we
         -- set it to the first line when editing a git commit message
        v_cmd [[ call setpos('.', [0, 1, 1, 0]) ]]
+        --[[
        buffer.textwidth = 72
        window.colorcolumn = "72"
+       --]]
       end
     })
   end
