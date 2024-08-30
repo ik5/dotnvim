@@ -134,6 +134,15 @@ require("lazy").setup({
     },
   };
 
+  {
+    'Jay-Madden/auto-fix-return.nvim',
+    config = function()
+      require("auto-fix-return").setup({
+        enable_autocmds = true, -- Enable or disable the autofix on type behvaior
+      })
+    end
+  };
+
   -- rust
   { 'simrat39/rust-tools.nvim' };
 
