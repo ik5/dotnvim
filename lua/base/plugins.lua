@@ -146,9 +146,6 @@ require("lazy").setup({
   -- rust
   { 'simrat39/rust-tools.nvim' };
 
-  -- flutter
-  { 'akinsho/flutter-tools.nvim' };
-
   -- clang
   { 'p00f/clangd_extensions.nvim' };
 
