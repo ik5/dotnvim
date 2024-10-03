@@ -104,9 +104,8 @@ mason.setup({
 })
 
 local lsp_servers = {
-  'clangd', 'lemminx', 'gopls', 'html', 'jsonls', 'rust_analyzer', 'yamlls',
-  'taplo', 'pyright', 'ruff', 'denols', 'biome', 'templ',
-  'arduino_language_server', 'htmx', 'lwc_ls', 'lua_ls',
+  'clangd', 'lemminx', 'gopls', 'html', 'jsonls', 'rust_analyzer', 'yamlls', 'taplo', 'pyright', 'ruff', 'denols',
+  'biome', 'templ', 'arduino_language_server', 'htmx', 'lwc_ls', 'lua_ls', 'solargraph', 'standardrb',
 }
 
 if utils.is_file_exists('/usr/bin/php') then
@@ -275,6 +274,19 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
     border = "single"
   }
 )
+
+--[[
+nvim_lsp.ruby_lsp.setup({
+  init_options = {
+    formatter = 'auto',
+    linters = { 'standard' },
+  },
+})
+--]]
+
+nvim_lsp.solargraph.setup({
+  diagnostics = true,
+})
 
 formatter.setup {}
 
