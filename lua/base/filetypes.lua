@@ -8,6 +8,7 @@ local window = vim.wo
 global.omnifunc = 'syntaxcomplete#Complete'
 buffer.omnifunc = 'syntaxcomplete#Complete'
 
+vim.cmd('setlocal omnifunc=v:lua.vim.lsp.omnifunc')
 vim.g.loaded_perl_provider = 0
 
 autocmd('FileType', {
