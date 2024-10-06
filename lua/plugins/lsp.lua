@@ -104,8 +104,8 @@ mason.setup({
 })
 
 local lsp_servers = {
-  'clangd', 'lemminx', 'gopls', 'html', 'jsonls', 'rust_analyzer', 'yamlls', 'taplo', 'pyright', 'ruff', 'denols',
-  'biome', 'templ', 'arduino_language_server', 'htmx', 'lwc_ls', 'lua_ls', 'solargraph', 'standardrb',
+  'clangd', 'lemminx', 'gopls', 'html', 'jsonls', 'rust_analyzer', 'yamlls', 'taplo', 'denols', 'biome', 'templ',
+  'arduino_language_server', 'htmx', 'lwc_ls', 'lua_ls', 'solargraph', 'standardrb', 'ruff',
 }
 
 if utils.is_file_exists('/usr/bin/php') then
@@ -118,7 +118,9 @@ if not configs.golangcilsp then
 			cmd = {'golangci-lint-langserver'},
 			root_dir = lsp_utils.root_pattern('.git', 'go.mod'),
 			init_options = {
-					command = { "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json", "--issues-exit-code=1" };
+					command = {
+          "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json", "--issues-exit-code=1",
+        };
 			}
 		};
 	}
@@ -213,12 +215,13 @@ nvim_lsp.ruff.setup {
       configurationPreference = "filesystemFirst",
       organizeImports = true,
       showSyntaxErrors = true,
+      lineLength = 120,
+
       lint = {
         enable = true,
         preview = true,
       },
       codeAction = {
-        disableRuleComment = { enable = true },
         fixViolation = { enable = true },
       },
       format = { preview = true },
@@ -226,6 +229,8 @@ nvim_lsp.ruff.setup {
   },
 }
 
+
+--[[
 nvim_lsp.pyright.setup {
   settings = {
     pyright = {
@@ -240,6 +245,7 @@ nvim_lsp.pyright.setup {
     },
   },
 }
+--]]
 
 mason_lspconfig.setup({
   ensure_installed = lsp_servers,
