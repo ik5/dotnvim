@@ -26,7 +26,7 @@ if vim.env.TERM == 'xterm' or vim.env.TERM == 'screen' or vim.env.TERM == 'rxvt'
 end
 
 -- fast saving
-set('n', '<leader>w', ':w!<cr><cr>')
+set('n', '<leader>W', ':w!<cr><cr>')
 
 -------------
 -- Windows
