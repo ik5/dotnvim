@@ -294,6 +294,19 @@ nvim_lsp.solargraph.setup({
   diagnostics = true,
 })
 
+if utils.is_file_exists('/usr/bin/superhtml') then
+  vim.api.nvim_create_autocmd("Filetype", {
+    pattern = { "html", "shtml", "htm" },
+    callback = function()
+      vim.lsp.start({
+        name = "superhtml",
+        cmd = { "superhtml", "lsp" },
+        root_dir = vim.fs.dirname(vim.fs.find({".git"}, { upward = true })[1])
+      })
+    end
+  })
+end
+
 formatter.setup {}
 
 require('rust-tools').setup({
