@@ -74,44 +74,38 @@ require("lazy").setup({
   -- navigation
   { "folke/which-key.nvim" };
   {
-    'jinh0/eyeliner.nvim',
-    config = function()
-      require'eyeliner'.setup {
-        -- show highlights only after keypress
-        highlight_on_key = true,
-
-        -- dim all other characters if set to true (recommended!)
-        dim = true,
-
-        -- set the maximum number of characters eyeliner.nvim will check from
-        -- your current cursor position; this is useful if you are dealing with
-        -- large files: see https://github.com/jinh0/eyeliner.nvim/issues/41
-        max_length = 9999,
-
-        -- filetypes for which eyeliner should be disabled;
-        -- e.g., to disable on help files:
-        -- disabled_filetypes = {"help"}
-        disabled_filetypes = {},
-
-        -- buftypes for which eyeliner should be disabled
-        -- e.g., disabled_buftypes = {"nofile"}
-        disabled_buftypes = {},
-
-        -- add eyeliner to f/F/t/T keymaps;
-        -- see section on advanced configuration for more information
-        default_keymaps = true,
-      }
-
-      vim.api.nvim_set_hl(0, 'EyelinerPrimary', { bold = true, underline = true })
-      vim.api.nvim_set_hl(0, 'EyelinerSecondary', { underline = true })
-
-      vim.api.nvim_create_autocmd('ColorScheme', {
-        pattern = '*',
-        callback = function()
-          vim.api.nvim_set_hl(0, 'EyelinerPrimary', { bold = true, underline = true })
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump({
+        action = function(match, state)
+          vim.api.nvim_win_call(match.win, function()
+            vim.api.nvim_win_set_cursor(match.win, match.pos)
+            vim.diagnostic.open_float()
+          end)
+          state:restore()
         end,
-      })
-    end
+        matcher = function(win)
+          ---@param diag Diagnostic
+          return vim.tbl_map(function(diag)
+            return {
+              pos = { diag.lnum + 1, diag.col },
+              end_pos = { diag.end_lnum + 1, diag.end_col - 1 },
+            }
+          end, vim.diagnostic.get(vim.api.nvim_win_get_buf(win)))
+        end,
+      }) end,
+        desc = "Flash jump"
+      },
+      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
+
   };
 
   -- Search and Replace
