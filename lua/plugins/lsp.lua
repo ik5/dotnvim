@@ -4,7 +4,17 @@ local lsp_utils = require "lspconfig/util"
 local mason = require "mason"
 local mason_lspconfig = require 'mason-lspconfig'
 local signature = require 'lsp_signature'
-local capabilities = require('cmp_nvim_lsp').default_capabilities()  -- capabilities of cmp_lsp as part of any LSP
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities()  -- capabilities of cmp_lsp as part of any LSP
+local capabilities = require('blink.cmp').get_lsp_capabilities(
+  {
+    textDocument = {
+      foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true
+      }
+    }
+  }
+)
 local formatter = require("formatter")
 local navic = require("nvim-navic")
 local utils = require('utils')
