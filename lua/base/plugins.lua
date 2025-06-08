@@ -41,7 +41,12 @@ require("lazy").setup({
   { "folke/todo-comments.nvim" };
 
   -- LSP
-  { 'neovim/nvim-lspconfig'};
+  {
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      {"saghen/blink.cmp",},
+    },
+  };
   {
     "williamboman/mason-lspconfig.nvim",
     dependencies = {
@@ -160,14 +165,42 @@ require("lazy").setup({
 --]]
   {
     'saghen/blink.cmp',
-    dependencies = {{ 'rafamadriz/friendly-snippets' }, { 'L3MON4D3/LuaSnip', version = 'v2.*' },},
+    dependencies = { {
+      'L3MON4D3/LuaSnip', version = 'v2.*' },
+      build = (function()
+                -- Build Step is needed for regex support in snippets.
+                -- This step is not supported in many windows environments.
+                -- Remove the below condition to re-enable on windows.
+                if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
+                    return
+                end
+                return "make install_jsregexp"
+            end)(),
+            dependencies = {
+                -- `friendly-snippets` contains a variety of premade snippets.
+                --    See the README about individual language/framework/plugin snippets:
+                --    https://github.com/rafamadriz/friendly-snippets
+                {
+                    "rafamadriz/friendly-snippets",
+                    config = function()
+                        require("luasnip.loaders.from_vscode").lazy_load()
+                    end,
+                },
+            },
+            opts = {},
+        },
+        "folke/lazydev.nvim",
+        "moyiz/blink-emoji.nvim",
 
     -- use a release tag to download pre-built binaries
-    version = '1.*',
+    version = '2.*',
+
     -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
     -- build = 'cargo build --release',
     -- If you use nix, you can build from source using latest nightly rust with:
     -- build = 'nix run .#build-plugin',
+
+    build = "cargo build --release",
     opts = {
       -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
       -- 'super-tab' for mappings similar to vscode (tab to accept)
@@ -193,14 +226,37 @@ require("lazy").setup({
 
       -- (Default) Only show the documentation popup when manually triggered
       completion = {
-        documentation = { auto_show = false } ,
+        documentation = { auto_show = true } ,
+        menu = { border = "rounded" },
       },
+
+      signature = {
+            enabled = true,
+    },
 
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
-      },
+        default = { "lsp", "path", "snippets",  "buffer", "emoji" },
+        providers = {
+                emoji = {
+                    module = "blink-emoji",
+                    name = "Emoji",
+                    score_offset = 15, -- Where to show in completions, Tune by preference
+                    opts = { insert = true }, -- Insert emoji (default) or complete its name
+                    should_show_items = function()
+                        return vim.tbl_contains(
+                            -- Enable emoji completion only for git commits and markdown.
+                            -- By default, enabled for all file-types.
+                            { "gitcommit", "markdown" },
+                            vim.o.filetype
+                        )
+                    end,
+                },
+		lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
+            },
+        },
+
 
       -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
       -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
